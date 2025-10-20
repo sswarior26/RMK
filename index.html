@@ -1,1 +1,4071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMK Restaurant Utensil Management System</title>
+    <style>
+        /* Design System CSS */
+        :root {
+            /* Primitive Color Tokens */
+            --color-white: rgba(255, 255, 255, 1);
+            --color-black: rgba(0, 0, 0, 1);
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-gray-400: rgba(119, 124, 124, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-400: rgba(45, 166, 178, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-teal-800: rgba(41, 150, 161, 1);
+            --color-red-400: rgba(255, 84, 89, 1);
+            --color-red-500: rgba(192, 21, 47, 1);
+            --color-orange-400: rgba(230, 129, 97, 1);
+            --color-orange-500: rgba(168, 75, 47, 1);
 
+            /* RGB versions for opacity control */
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-slate-500-rgb: 98, 108, 113;
+            --color-red-500-rgb: 192, 21, 47;
+            --color-red-400-rgb: 255, 84, 89;
+            --color-orange-500-rgb: 168, 75, 47;
+            --color-orange-400-rgb: 230, 129, 97;
+
+            /* Background color tokens (Light Mode) */
+            --color-bg-1: rgba(59, 130, 246, 0.08);
+            --color-bg-2: rgba(245, 158, 11, 0.08);
+            --color-bg-3: rgba(34, 197, 94, 0.08);
+            --color-bg-4: rgba(239, 68, 68, 0.08);
+            --color-bg-5: rgba(147, 51, 234, 0.08);
+            --color-bg-6: rgba(249, 115, 22, 0.08);
+            --color-bg-7: rgba(236, 72, 153, 0.08);
+            --color-bg-8: rgba(6, 182, 212, 0.08);
+
+            /* Semantic Color Tokens (Light Mode) */
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: #1E40AF;
+            --color-primary-hover: #1D4ED8;
+            --color-primary-active: #1E3A8A;
+            --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-btn-primary-text: var(--color-cream-50);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+            --color-error: var(--color-red-500);
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-info: var(--color-slate-500);
+            --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+            --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+            /* Typography */
+            --font-family-base: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-size-xs: 11px;
+            --font-size-sm: 12px;
+            --font-size-base: 14px;
+            --font-size-md: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 550;
+            --font-weight-bold: 600;
+            --line-height-tight: 1.2;
+            --line-height-normal: 1.5;
+            --letter-spacing-tight: -0.01em;
+
+            /* Spacing */
+            --space-0: 0;
+            --space-1: 1px;
+            --space-2: 2px;
+            --space-4: 4px;
+            --space-6: 6px;
+            --space-8: 8px;
+            --space-10: 10px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-base: 8px;
+            --radius-md: 10px;
+            --radius-lg: 12px;
+            --radius-full: 9999px;
+
+            /* Shadows */
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+
+            /* Animation */
+            --duration-fast: 150ms;
+            --duration-normal: 250ms;
+            --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: var(--font-size-base);
+            font-family: var(--font-family-base);
+            line-height: var(--line-height-normal);
+            color: var(--color-text);
+            background-color: var(--color-background);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            margin: 0;
+            font-weight: var(--font-weight-semibold);
+            line-height: var(--line-height-tight);
+            color: var(--color-text);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+
+        h1 { font-size: var(--font-size-4xl); }
+        h2 { font-size: var(--font-size-3xl); }
+        h3 { font-size: var(--font-size-2xl); }
+        h4 { font-size: var(--font-size-xl); }
+        h5 { font-size: var(--font-size-lg); }
+        h6 { font-size: var(--font-size-md); }
+
+        p {
+            margin: 0 0 var(--space-16) 0;
+        }
+
+        /* Layout */
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-16) var(--space-24);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+        }
+
+        .logo-text {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+        }
+
+        .app-nav {
+            display: flex;
+            gap: var(--space-8);
+        }
+
+        .nav-btn {
+            padding: var(--space-8) var(--space-16);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: all var(--duration-fast) var(--ease-standard);
+            min-height: 44px;
+        }
+
+        .nav-btn:hover {
+            background: var(--color-secondary);
+            color: var(--color-text);
+        }
+
+        .nav-btn.active {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .app-main {
+            flex: 1;
+            padding: var(--space-24);
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-8) var(--space-16);
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            cursor: pointer;
+            transition: all var(--duration-normal) var(--ease-standard);
+            border: none;
+            text-decoration: none;
+            min-height: 44px;
+            gap: var(--space-8);
+        }
+
+        .btn--primary {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .btn--primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn--secondary {
+            background: var(--color-secondary);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn--secondary:hover {
+            background: var(--color-secondary-hover);
+        }
+
+        .btn--success {
+            background: var(--color-success);
+            color: white;
+        }
+
+        .btn--warning {
+            background: var(--color-warning);
+            color: white;
+        }
+
+        .btn--error {
+            background: var(--color-error);
+            color: white;
+        }
+
+        .btn--sm {
+            padding: var(--space-6) var(--space-12);
+            font-size: var(--font-size-sm);
+            min-height: 36px;
+        }
+
+        .btn--lg {
+            padding: var(--space-12) var(--space-24);
+            font-size: var(--font-size-lg);
+            min-height: 52px;
+        }
+
+        /* Form elements */
+        .form-group {
+            margin-bottom: var(--space-16);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--space-8);
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-sm);
+        }
+
+        .form-control {
+            display: block;
+            width: 100%;
+            padding: var(--space-8) var(--space-12);
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+            color: var(--color-text);
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            transition: border-color var(--duration-fast) var(--ease-standard);
+            min-height: 44px;
+        }
+
+        .form-control:focus {
+            border-color: var(--color-primary);
+            outline: 2px solid var(--color-primary);
+            outline-offset: -1px;
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--color-surface);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: var(--space-16);
+        }
+
+        .card-header {
+            padding: var(--space-16);
+            border-bottom: 1px solid var(--color-card-border-inner);
+            background: var(--color-bg-1);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin-bottom: var(--space-24);
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            padding: var(--space-20);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-card-border);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            margin-bottom: var(--space-8);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            background: var(--color-surface);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th,
+        .table td {
+            padding: var(--space-12) var(--space-16);
+            text-align: left;
+            border-bottom: 1px solid var(--color-card-border-inner);
+        }
+
+        .table th {
+            background: var(--color-bg-1);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+            color: var(--color-text);
+        }
+
+        .table tr:hover {
+            background: var(--color-bg-2);
+        }
+
+        /* Status badges */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-4) var(--space-8);
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .status--success {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--color-success);
+        }
+
+        .status--error {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--color-error);
+        }
+
+        .status--warning {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--color-warning);
+        }
+
+        .status--info {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--color-primary);
+        }
+
+        /* Backdrop and Center Panel */
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(2px);
+        }
+
+        .center-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--color-surface);
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 600px;
+            overflow: auto;
+            border-radius: var(--radius-lg);
+            z-index: 1001;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-20) var(--space-24);
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-bg-1);
+        }
+
+        .panel-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-semibold);
+            margin: 0;
+        }
+
+        .close-panel-btn {
+            background: none;
+            border: none;
+            font-size: var(--font-size-2xl);
+            cursor: pointer;
+            padding: var(--space-4);
+            color: var(--color-text-secondary);
+            line-height: 1;
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .close-panel-btn:hover {
+            color: var(--color-text);
+        }
+
+        .panel-content {
+            padding: var(--space-24);
+        }
+
+        /* Toast notifications */
+        .toast-container {
+            position: fixed;
+            top: var(--space-24);
+            right: var(--space-24);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-8);
+        }
+
+        .toast {
+            background: var(--color-success);
+            color: white;
+            padding: var(--space-12) var(--space-16);
+            border-radius: var(--radius-base);
+            box-shadow: var(--shadow-md);
+            max-width: 400px;
+            font-weight: var(--font-weight-medium);
+            animation: slideInRight 0.3s ease;
+        }
+
+        .toast.toast-error {
+            background: var(--color-error);
+        }
+
+        .toast.toast-warning {
+            background: var(--color-warning);
+        }
+
+        .toast.fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
+        /* Three column layout for utensils */
+        .three-column-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr;
+            gap: var(--space-16);
+            min-height: 500px;
+        }
+
+        .column {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .column-header {
+            padding: var(--space-16);
+            background: var(--color-bg-1);
+            border-bottom: 1px solid var(--color-border);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .column-content {
+            padding: var(--space-16);
+            height: 450px;
+            overflow-y: auto;
+        }
+
+        .category-item,
+        .utensil-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-12);
+            margin-bottom: var(--space-8);
+            background: var(--color-background);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: background var(--duration-fast);
+        }
+
+        .category-item:hover,
+        .utensil-item:hover {
+            background: var(--color-bg-2);
+        }
+
+        .category-item.active {
+            background: var(--color-primary);
+            color: var(--color-btn-primary-text);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: var(--space-4);
+        }
+
+        .action-btn {
+            padding: var(--space-4) var(--space-8);
+            font-size: var(--font-size-xs);
+            min-height: 32px;
+            min-width: 32px;
+        }
+
+        /* Inline forms */
+        .inline-form {
+            display: flex;
+            gap: var(--space-8);
+            margin-bottom: var(--space-16);
+            align-items: flex-end;
+        }
+
+        .inline-form .form-group {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        /* Rental form specific */
+        .rental-items-list {
+            background: var(--color-bg-1);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            padding: var(--space-16);
+            margin: var(--space-16) 0;
+        }
+
+        .rental-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-8) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .rental-item:last-child {
+            border-bottom: none;
+        }
+
+        .totals-section {
+            background: var(--color-bg-2);
+            padding: var(--space-16);
+            border-radius: var(--radius-base);
+            margin: var(--space-16) 0;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-8);
+        }
+
+        .total-row:last-child {
+            margin-bottom: 0;
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-lg);
+            border-top: 1px solid var(--color-border);
+            padding-top: var(--space-8);
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-16);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-16);
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-16);
+        }
+
+        /* Utility classes */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .gap-8 {
+            gap: var(--space-8);
+        }
+
+        .gap-16 {
+            gap: var(--space-16);
+        }
+
+        .mb-16 {
+            margin-bottom: var(--space-16);
+        }
+
+        .mb-24 {
+            margin-bottom: var(--space-24);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .font-bold {
+            font-weight: var(--font-weight-bold);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .currency {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .app-header {
+                padding: var(--space-12) var(--space-16);
+            }
+
+            .app-nav {
+                flex-wrap: wrap;
+                gap: var(--space-4);
+            }
+
+            .nav-btn {
+                padding: var(--space-6) var(--space-12);
+                font-size: var(--font-size-xs);
+            }
+
+            .app-main {
+                padding: var(--space-16);
+            }
+
+            .three-column-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-12);
+            }
+
+            .column {
+                min-height: 300px;
+            }
+
+            .column-content {
+                height: 250px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-12);
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .center-panel {
+                width: 95vw;
+                max-height: 95vh;
+            }
+
+            .inline-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .inline-form .form-group {
+                margin-bottom: var(--space-12);
+            }
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            border: 2px solid var(--color-border);
+            border-top: 2px solid var(--color-primary);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Section styles */
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-24);
+            padding-bottom: var(--space-16);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text);
+        }
+
+        /* Confirmation styles */
+        .inline-confirm {
+            display: flex;
+            align-items: center;
+            gap: var(--space-8);
+            padding: var(--space-8);
+            background: var(--color-bg-4);
+            border-radius: var(--radius-base);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .inline-confirm span {
+            flex: 1;
+            font-size: var(--font-size-sm);
+            color: var(--color-error);
+        }
+
+        /* Chart styles */
+        .chart-container {
+            background: var(--color-surface);
+            padding: var(--space-20);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-12);
+        }
+
+        .chart-label {
+            min-width: 120px;
+            font-size: var(--font-size-sm);
+            margin-right: var(--space-12);
+        }
+
+        .chart-bar-fill {
+            height: 20px;
+            background: var(--color-primary);
+            border-radius: var(--radius-sm);
+            transition: width 0.5s ease;
+        }
+
+        .chart-value {
+            margin-left: var(--space-8);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="app-logo">
+                    <span class="logo-text">🍽️ RMK Restaurant Management</span>
+                </div>
+                <nav class="app-nav">
+                    <button class="nav-btn active" data-section="dashboard">Dashboard</button>
+                    <button class="nav-btn" data-section="rentals">Rentals</button>
+                    <button class="nav-btn" data-section="utensils">Utensils</button>
+                    <button class="nav-btn" data-section="inventory">Inventory</button>
+                    <button class="nav-btn" data-section="customers">Customers</button>
+                    <button class="nav-btn" data-section="analytics">Analytics</button>
+                    <button class="nav-btn" data-section="transactions">Transactions</button>
+                    <button class="nav-btn" data-section="settings">Settings</button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="section-header">
+                    <h1 class="section-title">Dashboard</h1>
+                    <div class="flex gap-8">
+                        <button class="btn btn--primary add-rental-btn">+ Add Rental</button>
+                        <button class="btn btn--secondary add-utensil-btn">+ Add Utensil</button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-rentals-stat">0</div>
+                        <div class="stat-label">Total Rentals</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="available-items-stat">0</div>
+                        <div class="stat-label">Available Items</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="overdue-items-stat">0</div>
+                        <div class="stat-label">Overdue Rentals</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value currency" id="monthly-revenue-stat">₹0</div>
+                        <div class="stat-label">Monthly Revenue</div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity and Alerts -->
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Recent Rentals</h3>
+                        </div>
+                        <div class="card-body" id="recent-rentals-list">
+                            <!-- Recent rentals will be populated here -->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Low Inventory Alerts</h3>
+                        </div>
+                        <div class="card-body" id="low-inventory-alerts">
+                            <!-- Low inventory alerts will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rentals Section -->
+            <section id="rentals" class="section">
+                <div class="section-header">
+                    <h1 class="section-title">Rental Management</h1>
+                    <button class="btn btn--primary add-rental-btn">+ Add Rental</button>
+                </div>
+
+                <!-- Filters -->
+                <div class="card mb-24">
+                    <div class="card-body">
+                        <div class="flex gap-16">
+                            <div class="form-group">
+                                <label class="form-label">Filter by Status</label>
+                                <select class="form-control" id="rental-status-filter">
+                                    <option value="">All Statuses</option>
+                                    <option value="active">Active</option>
+                                    <option value="returned">Returned</option>
+                                    <option value="overdue">Overdue</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Search Customer</label>
+                                <input type="text" class="form-control" id="rental-search" placeholder="Search by name or phone...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rentals List -->
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Rental ID</th>
+                                <th>Customer</th>
+                                <th>Phone</th>
+                                <th>Period</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="rentals-table-body">
+                            <!-- Rental rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Utensils Section -->
+            <section id="utensils" class="section">
+                <div class="section-header">
+                    <h1 class="section-title">Utensil Management</h1>
+                    <button class="btn btn--primary add-utensil-btn">+ Add Utensil</button>
+                </div>
+
+                <div class="three-column-layout">
+                    <!-- Main Categories -->
+                    <div class="column">
+                        <div class="column-header">Main Categories</div>
+                        <div class="column-content">
+                            <div class="inline-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="new-main-category" placeholder="Category name...">
+                                </div>
+                                <button class="btn btn--primary btn--sm add-main-category-btn">Add</button>
+                            </div>
+                            <div id="main-categories-list">
+                                <!-- Main categories will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sub Categories -->
+                    <div class="column">
+                        <div class="column-header">Sub Categories</div>
+                        <div class="column-content">
+                            <div class="inline-form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="new-sub-category" placeholder="Sub-category name...">
+                                </div>
+                                <button class="btn btn--primary btn--sm add-sub-category-btn">Add</button>
+                            </div>
+                            <div id="sub-categories-list">
+                                <!-- Sub categories will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Individual Utensils -->
+                    <div class="column">
+                        <div class="column-header">Utensils</div>
+                        <div class="column-content">
+                            <button class="btn btn--primary btn--sm mb-16 add-utensil-btn">+ Add Utensil</button>
+                            <div id="utensils-list">
+                                <!-- Utensils will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other sections will be populated by JavaScript -->
+            <section id="inventory" class="section"></section>
+            <section id="customers" class="section"></section>
+            <section id="analytics" class="section"></section>
+            <section id="transactions" class="section"></section>
+            <section id="settings" class="section"></section>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <script>
+        // Application Data Structure
+        let appData = {
+            categories: {},
+            rentals: [],
+            transactions: [],
+            customers: [],
+            settings: {
+                company: {
+                    name: 'RMK Restaurant Services',
+                    address: '',
+                    phone: '',
+                    email: '',
+                    gst_number: '',
+                    logo_url: ''
+                },
+                invoice: {
+                    number_prefix: 'INV',
+                    number_start: 1001,
+                    current_number: 1001,
+                    tax_rate: 18,
+                    show_days: true,
+                    show_gst: true,
+                    terms: 'All items must be returned in good condition. Damage charges apply.',
+                    footer: 'Thank you for choosing RMK Restaurant Management!'
+                }
+            }
+        };
+
+        // Current state
+        let currentSection = 'dashboard';
+        let selectedMainCategory = null;
+        let selectedSubCategory = null;
+
+        // Utility Functions
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        }
+
+        function formatDateDisplay(dateString) {
+            if (!dateString) return '';
+            const [year, month, day] = dateString.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
+        function formatDateInput(displayDate) {
+            if (!displayDate) return '';
+            const [day, month, year] = displayDate.split('/');
+            return `${year}-${month}-${day}`;
+        }
+
+        function generateId(prefix, array) {
+            const maxId = array.length > 0 ? Math.max(...array.map(item => {
+                const num = parseInt(item.id.split('-')[1]);
+                return isNaN(num) ? 0 : num;
+            })) : 0;
+            return `${prefix}-${String(maxId + 1).padStart(3, '0')}`;
+        }
+
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            
+            const container = document.getElementById('toast-container');
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('fade-out');
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Center Panel System
+        function showCenterPanel(title, contentHTML) {
+            // Remove existing panels
+            closeCenterPanel();
+            
+            // Create backdrop
+            const backdrop = document.createElement('div');
+            backdrop.className = 'backdrop';
+            backdrop.onclick = closeCenterPanel;
+            
+            // Create panel
+            const panel = document.createElement('div');
+            panel.className = 'center-panel';
+            panel.innerHTML = `
+                <div class="panel-header">
+                    <h2 class="panel-title">${title}</h2>
+                    <button class="close-panel-btn" onclick="closeCenterPanel()">&times;</button>
+                </div>
+                <div class="panel-content">
+                    ${contentHTML}
+                </div>
+            `;
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(panel);
+        }
+
+        function closeCenterPanel() {
+            const backdrop = document.querySelector('.backdrop');
+            const panel = document.querySelector('.center-panel');
+            
+            if (backdrop) backdrop.remove();
+            if (panel) panel.remove();
+        }
+
+        // Data Persistence (In-Memory Storage for Demo)
+        function saveData() {
+            // In a real application, this would save to localStorage or a backend
+            // For this demo, data persists in memory during the session
+            console.log('Data saved to memory (would normally use localStorage)');
+        }
+
+        function loadData() {
+            // Initialize with default data for demo
+            initializeDefaultData();
+            console.log('Data loaded from memory (would normally use localStorage)');
+        }
+
+        function initializeDefaultData() {
+            appData = {
+                categories: {
+                    'Tableware': {
+                        'Plates': {
+                            items: [
+                                {
+                                    id: 'utl-001',
+                                    name: 'Dinner Plate',
+                                    rate: 25,
+                                    max_quantity: 100,
+                                    available_quantity: 85,
+                                    description: 'Standard white ceramic dinner plate',
+                                    image_url: '',
+                                    rental_count: 3
+                                },
+                                {
+                                    id: 'utl-002',
+                                    name: 'Side Plate',
+                                    rate: 15,
+                                    max_quantity: 80,
+                                    available_quantity: 80,
+                                    description: 'Small ceramic side plate',
+                                    image_url: '',
+                                    rental_count: 0
+                                }
+                            ]
+                        },
+                        'Bowls': {
+                            items: [
+                                {
+                                    id: 'utl-003',
+                                    name: 'Serving Bowl Large',
+                                    rate: 35,
+                                    max_quantity: 50,
+                                    available_quantity: 45,
+                                    description: 'Large serving bowl for main dishes',
+                                    image_url: '',
+                                    rental_count: 2
+                                }
+                            ]
+                        }
+                    },
+                    'Glassware': {
+                        'Wine Glasses': {
+                            items: [
+                                {
+                                    id: 'utl-004',
+                                    name: 'Red Wine Glass',
+                                    rate: 30,
+                                    max_quantity: 80,
+                                    available_quantity: 50,
+                                    description: 'Crystal red wine glass',
+                                    image_url: '',
+                                    rental_count: 5
+                                }
+                            ]
+                        },
+                        'Water Glasses': {
+                            items: [
+                                {
+                                    id: 'utl-005',
+                                    name: 'Water Tumbler',
+                                    rate: 10,
+                                    max_quantity: 150,
+                                    available_quantity: 150,
+                                    description: 'Standard water glass',
+                                    image_url: '',
+                                    rental_count: 0
+                                }
+                            ]
+                        }
+                    },
+                    'Cutlery': {
+                        'Forks': {
+                            items: [
+                                {
+                                    id: 'utl-006',
+                                    name: 'Dinner Fork',
+                                    rate: 5,
+                                    max_quantity: 200,
+                                    available_quantity: 200,
+                                    description: 'Stainless steel dinner fork',
+                                    image_url: '',
+                                    rental_count: 0
+                                }
+                            ]
+                        },
+                        'Spoons': {
+                            items: [
+                                {
+                                    id: 'utl-007',
+                                    name: 'Soup Spoon',
+                                    rate: 5,
+                                    max_quantity: 200,
+                                    available_quantity: 200,
+                                    description: 'Stainless steel soup spoon',
+                                    image_url: '',
+                                    rental_count: 0
+                                }
+                            ]
+                        }
+                    },
+                    'Furniture': {
+                        'Chairs': {
+                            items: [
+                                {
+                                    id: 'utl-008',
+                                    name: 'Banquet Chair',
+                                    rate: 50,
+                                    max_quantity: 150,
+                                    available_quantity: 130,
+                                    description: 'Padded banquet chair with cover',
+                                    image_url: '',
+                                    rental_count: 4
+                                }
+                            ]
+                        },
+                        'Tables': {
+                            items: [
+                                {
+                                    id: 'utl-009',
+                                    name: 'Round Table 6-seater',
+                                    rate: 200,
+                                    max_quantity: 30,
+                                    available_quantity: 28,
+                                    description: 'Round dining table for 6 people',
+                                    image_url: '',
+                                    rental_count: 2
+                                }
+                            ]
+                        }
+                    }
+                },
+                rentals: [
+                    {
+                        id: 'RNT-001',
+                        customer_name: 'Rajesh Kumar',
+                        customer_phone: '9876543210',
+                        customer_address: '123 MG Road, Bangalore',
+                        verification_proof: 'Aadhar Card',
+                        start_date: '2025-10-18',
+                        return_date: '2025-10-21',
+                        actual_return_date: null,
+                        status: 'active',
+                        items: [
+                            {
+                                utensil_id: 'utl-001',
+                                name: 'Dinner Plate',
+                                category: 'Tableware > Plates',
+                                quantity: 15,
+                                rate: 25,
+                                days: 3,
+                                total: 1125
+                            },
+                            {
+                                utensil_id: 'utl-004',
+                                name: 'Red Wine Glass',
+                                category: 'Glassware > Wine Glasses',
+                                quantity: 30,
+                                rate: 30,
+                                days: 3,
+                                total: 2700
+                            }
+                        ],
+                        days: 3,
+                        subtotal: 3825,
+                        gst_amount: 688.50,
+                        total_amount: 4513.50,
+                        invoice_number: 'INV-1001',
+                        notes: 'Wedding reception rental'
+                    },
+                    {
+                        id: 'RNT-002',
+                        customer_name: 'Priya Sharma',
+                        customer_phone: '9123456789',
+                        customer_address: '456 Brigade Road, Bangalore',
+                        verification_proof: 'PAN Card',
+                        start_date: '2025-10-15',
+                        return_date: '2025-10-17',
+                        actual_return_date: '2025-10-17',
+                        status: 'returned',
+                        items: [
+                            {
+                                utensil_id: 'utl-008',
+                                name: 'Banquet Chair',
+                                category: 'Furniture > Chairs',
+                                quantity: 20,
+                                rate: 50,
+                                days: 2,
+                                total: 2000
+                            },
+                            {
+                                utensil_id: 'utl-009',
+                                name: 'Round Table 6-seater',
+                                category: 'Furniture > Tables',
+                                quantity: 2,
+                                rate: 200,
+                                days: 2,
+                                total: 800
+                            }
+                        ],
+                        days: 2,
+                        subtotal: 2800,
+                        gst_amount: 504,
+                        total_amount: 3304,
+                        invoice_number: 'INV-1002',
+                        notes: 'Corporate event'
+                    }
+                ],
+                transactions: [
+                    {
+                        id: 'TXN-001',
+                        date: '2025-10-18T10:30:00',
+                        type: 'Rental Payment',
+                        customer_name: 'Rajesh Kumar',
+                        customer_phone: '9876543210',
+                        amount: 4513.50,
+                        rental_id: 'RNT-001',
+                        status: 'Completed',
+                        payment_method: 'UPI',
+                        description: 'Full rental payment for wedding reception'
+                    },
+                    {
+                        id: 'TXN-002',
+                        date: '2025-10-15T14:20:00',
+                        type: 'Rental Payment',
+                        customer_name: 'Priya Sharma',
+                        customer_phone: '9123456789',
+                        amount: 3304,
+                        rental_id: 'RNT-002',
+                        status: 'Completed',
+                        payment_method: 'Cash',
+                        description: 'Corporate event rental payment'
+                    }
+                ],
+                customers: [
+                    {
+                        id: 'CUST-001',
+                        name: 'Rajesh Kumar',
+                        phone: '9876543210',
+                        email: 'rajesh@example.com',
+                        address: '123 MG Road, Bangalore',
+                        total_rentals: 1,
+                        last_rental_date: '2025-10-18',
+                        active_rentals: 1
+                    },
+                    {
+                        id: 'CUST-002',
+                        name: 'Priya Sharma',
+                        phone: '9123456789',
+                        email: 'priya@example.com',
+                        address: '456 Brigade Road, Bangalore',
+                        total_rentals: 1,
+                        last_rental_date: '2025-10-15',
+                        active_rentals: 0
+                    }
+                ],
+                settings: {
+                    company: {
+                        name: 'RMK Restaurant Services',
+                        address: '',
+                        phone: '',
+                        email: '',
+                        gst_number: '',
+                        logo_url: ''
+                    },
+                    invoice: {
+                        number_prefix: 'INV',
+                        number_start: 1001,
+                        current_number: 1003,
+                        tax_rate: 18,
+                        show_days: true,
+                        show_gst: true,
+                        terms: 'All items must be returned in good condition. Damage charges apply.',
+                        footer: 'Thank you for choosing RMK Restaurant Management!'
+                    }
+                }
+            };
+        }
+
+        // Find utensil by ID
+        function findUtensilById(id) {
+            for (let mainCat in appData.categories) {
+                for (let subCat in appData.categories[mainCat]) {
+                    const found = appData.categories[mainCat][subCat].items.find(u => u.id === id);
+                    if (found) return found;
+                }
+            }
+            return null;
+        }
+
+        // Navigation System
+        function switchSection(sectionName) {
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.section === sectionName) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionName;
+                
+                // Render section content
+                switch (sectionName) {
+                    case 'dashboard':
+                        renderDashboard();
+                        break;
+                    case 'rentals':
+                        renderRentals();
+                        break;
+                    case 'utensils':
+                        renderUtensils();
+                        break;
+                    case 'inventory':
+                        renderInventory();
+                        break;
+                    case 'customers':
+                        renderCustomers();
+                        break;
+                    case 'analytics':
+                        renderAnalytics();
+                        break;
+                    case 'transactions':
+                        renderTransactions();
+                        break;
+                    case 'settings':
+                        renderSettings();
+                        break;
+                }
+            }
+        }
+
+        // Dashboard Rendering
+        function renderDashboard() {
+            // Update stats
+            const totalRentals = appData.rentals.length;
+            const availableItems = getTotalAvailableItems();
+            const overdueRentals = getOverdueRentals().length;
+            const monthlyRevenue = getMonthlyRevenue();
+
+            document.getElementById('total-rentals-stat').textContent = totalRentals;
+            document.getElementById('available-items-stat').textContent = availableItems;
+            document.getElementById('overdue-items-stat').textContent = overdueRentals;
+            document.getElementById('monthly-revenue-stat').textContent = formatCurrency(monthlyRevenue);
+
+            // Render recent rentals
+            renderRecentRentals();
+            
+            // Render low inventory alerts
+            renderLowInventoryAlerts();
+        }
+
+        function getTotalAvailableItems() {
+            let total = 0;
+            for (let mainCat in appData.categories) {
+                for (let subCat in appData.categories[mainCat]) {
+                    appData.categories[mainCat][subCat].items.forEach(item => {
+                        total += item.available_quantity;
+                    });
+                }
+            }
+            return total;
+        }
+
+        function getOverdueRentals() {
+            const today = new Date();
+            return appData.rentals.filter(rental => {
+                if (rental.status === 'returned') return false;
+                const returnDate = new Date(rental.return_date);
+                return returnDate < today;
+            });
+        }
+
+        function getMonthlyRevenue() {
+            const now = new Date();
+            const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+            const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+            
+            return appData.transactions
+                .filter(transaction => {
+                    const transactionDate = new Date(transaction.date);
+                    return transactionDate >= firstDayOfMonth && 
+                           transactionDate <= lastDayOfMonth &&
+                           transaction.type === 'Rental Payment' &&
+                           transaction.status === 'Completed';
+                })
+                .reduce((sum, transaction) => sum + transaction.amount, 0);
+        }
+
+        function renderRecentRentals() {
+            const container = document.getElementById('recent-rentals-list');
+            const recentRentals = appData.rentals
+                .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+                .slice(0, 5);
+
+            if (recentRentals.length === 0) {
+                container.innerHTML = '<p class="text-center">No rentals found.</p>';
+                return;
+            }
+
+            container.innerHTML = recentRentals.map(rental => `
+                <div class="flex justify-between items-center" style="padding: 8px 0; border-bottom: 1px solid var(--color-border);">
+                    <div>
+                        <div class="font-bold">${rental.id}</div>
+                        <div style="font-size: 12px; color: var(--color-text-secondary);">${rental.customer_name || 'N/A'} - ${rental.customer_phone}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="currency">${formatCurrency(rental.total_amount)}</div>
+                        <div class="status status--${rental.status === 'active' ? 'info' : rental.status === 'returned' ? 'success' : 'error'}">
+                            ${rental.status.toUpperCase()}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderLowInventoryAlerts() {
+            const container = document.getElementById('low-inventory-alerts');
+            const lowStockItems = [];
+            
+            for (let mainCat in appData.categories) {
+                for (let subCat in appData.categories[mainCat]) {
+                    appData.categories[mainCat][subCat].items.forEach(item => {
+                        const utilizationPercent = ((item.max_quantity - item.available_quantity) / item.max_quantity) * 100;
+                        if (utilizationPercent > 90 || item.available_quantity < 10) {
+                            lowStockItems.push({
+                                ...item,
+                                category: `${mainCat} > ${subCat}`,
+                                utilizationPercent
+                            });
+                        }
+                    });
+                }
+            }
+
+            if (lowStockItems.length === 0) {
+                container.innerHTML = '<p class="text-center" style="color: var(--color-success);">All items are well stocked! ✓</p>';
+                return;
+            }
+
+            container.innerHTML = lowStockItems.map(item => `
+                <div class="flex justify-between items-center" style="padding: 8px 0; border-bottom: 1px solid var(--color-border);">
+                    <div>
+                        <div class="font-bold">${item.name}</div>
+                        <div style="font-size: 12px; color: var(--color-text-secondary);">${item.category}</div>
+                    </div>
+                    <div class="text-right">
+                        <div class="status status--${item.available_quantity === 0 ? 'error' : 'warning'}">
+                            ${item.available_quantity}/${item.max_quantity} Available
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Continue with other rendering functions...
+        // [Due to length constraints, I'll need to continue in the next part]
+        
+        // Event Delegation
+        document.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Navigation
+            if (e.target.classList.contains('nav-btn')) {
+                const section = e.target.dataset.section;
+                switchSection(section);
+            }
+            
+            // Add rental buttons
+            if (e.target.closest('.add-rental-btn')) {
+                showAddRentalForm();
+            }
+            
+            // Add utensil buttons
+            if (e.target.closest('.add-utensil-btn')) {
+                showAddUtensilForm();
+            }
+            
+            // Add main category
+            if (e.target.closest('.add-main-category-btn')) {
+                addMainCategory();
+            }
+            
+            // Add sub category
+            if (e.target.closest('.add-sub-category-btn')) {
+                addSubCategory();
+            }
+            
+            // Category selection
+            if (e.target.closest('.category-item')) {
+                const categoryName = e.target.closest('.category-item').dataset.category;
+                if (categoryName) selectMainCategory(categoryName);
+            }
+            
+            // Sub-category selection
+            if (e.target.closest('.sub-category-item')) {
+                const subCategoryName = e.target.closest('.sub-category-item').dataset.subcategory;
+                if (subCategoryName) selectSubCategory(subCategoryName);
+            }
+            
+            // Edit rental
+            if (e.target.closest('.edit-rental-btn')) {
+                const rentalId = e.target.closest('.edit-rental-btn').dataset.id;
+                const rental = appData.rentals.find(r => r.id === rentalId);
+                if (rental) showAddRentalForm(rental);
+            }
+            
+            // Return rental
+            if (e.target.closest('.return-rental-btn')) {
+                const rentalId = e.target.closest('.return-rental-btn').dataset.id;
+                showInlineConfirmation(
+                    `Mark rental ${rentalId} as returned? This will restore inventory.`,
+                    () => returnRental(rentalId)
+                );
+            }
+            
+            // Delete rental
+            if (e.target.closest('.delete-rental-btn')) {
+                const rentalId = e.target.closest('.delete-rental-btn').dataset.id;
+                showInlineConfirmation(
+                    `Delete rental ${rentalId}? This will restore inventory and cannot be undone.`,
+                    () => deleteRental(rentalId)
+                );
+            }
+            
+            // Generate invoice
+            if (e.target.closest('.invoice-rental-btn')) {
+                const rentalId = e.target.closest('.invoice-rental-btn').dataset.id;
+                generateInvoice(rentalId);
+            }
+            
+            // Send WhatsApp
+            if (e.target.closest('.whatsapp-rental-btn')) {
+                const rentalId = e.target.closest('.whatsapp-rental-btn').dataset.id;
+                sendWhatsAppInvoice(rentalId);
+            }
+            
+            // Edit utensil
+            if (e.target.closest('.edit-utensil-btn')) {
+                const utensilId = e.target.closest('.edit-utensil-btn').dataset.id;
+                const utensil = findUtensilById(utensilId);
+                if (utensil) showAddUtensilForm(utensil);
+            }
+            
+            // Delete utensil
+            if (e.target.closest('.delete-utensil-btn')) {
+                const utensilId = e.target.closest('.delete-utensil-btn').dataset.id;
+                showInlineConfirmation(
+                    'Delete this utensil? This action cannot be undone.',
+                    () => deleteUtensil(utensilId)
+                );
+            }
+            
+            // Edit customer
+            if (e.target.closest('.edit-customer-btn')) {
+                const customerId = e.target.closest('.edit-customer-btn').dataset.id;
+                const customer = appData.customers.find(c => c.id === customerId);
+                if (customer) showAddCustomerForm(customer);
+            }
+            
+            // View customer history
+            if (e.target.closest('.view-customer-history-btn')) {
+                const customerId = e.target.closest('.view-customer-history-btn').dataset.id;
+                viewCustomerHistory(customerId);
+            }
+            
+            // Quick rental for customer
+            if (e.target.closest('.quick-rental-btn')) {
+                const phone = e.target.closest('.quick-rental-btn').dataset.phone;
+                const customer = appData.customers.find(c => c.phone === phone);
+                if (customer) {
+                    // Pre-fill rental form with customer data
+                    showAddRentalForm();
+                    setTimeout(() => {
+                        document.getElementById('customer-phone').value = customer.phone;
+                        document.getElementById('customer-name').value = customer.name;
+                        document.getElementById('customer-address').value = customer.address || '';
+                    }, 100);
+                }
+            }
+            
+            // Edit transaction
+            if (e.target.closest('.edit-transaction-btn')) {
+                const transactionId = e.target.closest('.edit-transaction-btn').dataset.id;
+                const transaction = appData.transactions.find(t => t.id === transactionId);
+                if (transaction) showAddTransactionForm(transaction);
+            }
+            
+            // Delete transaction
+            if (e.target.closest('.delete-transaction-btn')) {
+                const transactionId = e.target.closest('.delete-transaction-btn').dataset.id;
+                showInlineConfirmation(
+                    'Delete this transaction? This action cannot be undone.',
+                    () => deleteTransaction(transactionId)
+                );
+            }
+        });
+
+        // Additional Functions
+        function showInlineConfirmation(message, onConfirm) {
+            const confirmHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <p style="margin-bottom: 20px; color: var(--color-error);">${message}</p>
+                    <div class="flex gap-16 justify-center">
+                        <button class="btn btn--error" id="confirm-action-btn">Yes, Continue</button>
+                        <button class="btn btn--secondary" onclick="closeCenterPanel()">Cancel</button>
+                    </div>
+                </div>
+            `;
+            
+            showCenterPanel('Confirm Action', confirmHTML);
+            
+            // Add event listener for confirm button
+            document.getElementById('confirm-action-btn').addEventListener('click', function() {
+                onConfirm();
+                closeCenterPanel();
+            });
+        }
+        
+        function returnRental(rentalId) {
+            const rental = appData.rentals.find(r => r.id === rentalId);
+            if (!rental) return;
+            
+            // Restore inventory
+            rental.items.forEach(item => {
+                const utensil = findUtensilById(item.utensil_id);
+                if (utensil) {
+                    utensil.available_quantity += item.quantity;
+                }
+            });
+            
+            // Update rental status
+            rental.status = 'returned';
+            rental.actual_return_date = new Date().toISOString().split('T')[0];
+            
+            // Update customer active rentals
+            const customer = appData.customers.find(c => c.phone === rental.customer_phone);
+            if (customer) {
+                customer.active_rentals = Math.max(0, customer.active_rentals - 1);
+            }
+            
+            saveData();
+            showToast('Rental marked as returned successfully');
+            renderRentalsTable();
+            if (currentSection === 'dashboard') renderDashboard();
+        }
+        
+        function deleteRental(rentalId) {
+            const rentalIndex = appData.rentals.findIndex(r => r.id === rentalId);
+            if (rentalIndex === -1) return;
+            
+            const rental = appData.rentals[rentalIndex];
+            
+            // Restore inventory if not returned
+            if (rental.status !== 'returned') {
+                rental.items.forEach(item => {
+                    const utensil = findUtensilById(item.utensil_id);
+                    if (utensil) {
+                        utensil.available_quantity += item.quantity;
+                    }
+                });
+            }
+            
+            // Update customer data
+            const customer = appData.customers.find(c => c.phone === rental.customer_phone);
+            if (customer) {
+                customer.total_rentals = Math.max(0, customer.total_rentals - 1);
+                if (rental.status === 'active') {
+                    customer.active_rentals = Math.max(0, customer.active_rentals - 1);
+                }
+            }
+            
+            // Remove rental and related transaction
+            appData.rentals.splice(rentalIndex, 1);
+            const transactionIndex = appData.transactions.findIndex(t => t.rental_id === rentalId);
+            if (transactionIndex >= 0) {
+                appData.transactions.splice(transactionIndex, 1);
+            }
+            
+            saveData();
+            showToast('Rental deleted successfully');
+            renderRentalsTable();
+            if (currentSection === 'dashboard') renderDashboard();
+        }
+        
+        function deleteUtensil(utensilId) {
+            for (let mainCat in appData.categories) {
+                for (let subCat in appData.categories[mainCat]) {
+                    const items = appData.categories[mainCat][subCat].items;
+                    const index = items.findIndex(item => item.id === utensilId);
+                    if (index >= 0) {
+                        items.splice(index, 1);
+                        saveData();
+                        showToast('Utensil deleted successfully');
+                        renderUtensilsList();
+                        return;
+                    }
+                }
+            }
+        }
+        
+        function generateInvoice(rentalId) {
+            const rental = appData.rentals.find(r => r.id === rentalId);
+            if (!rental) return;
+            
+            const company = appData.settings.company;
+            const invoiceSettings = appData.settings.invoice;
+            
+            const invoiceHTML = `
+                <div style="max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+                    <!-- Header -->
+                    <div style="text-align: center; margin-bottom: 30px; border-bottom: 2px solid var(--color-primary); padding-bottom: 20px;">
+                        <h1 style="color: var(--color-primary); margin: 0;">${company.name || 'RMK Restaurant Services'}</h1>
+                        ${company.address ? `<p style="margin: 5px 0;">${company.address}</p>` : ''}
+                        <p style="margin: 5px 0;">
+                            ${company.phone ? `Phone: ${company.phone}` : ''}
+                            ${company.email ? ` | Email: ${company.email}` : ''}
+                        </p>
+                        ${company.gst_number ? `<p style="margin: 5px 0;"><strong>GST No: ${company.gst_number}</strong></p>` : ''}
+                    </div>
+                    
+                    <!-- Invoice Details -->
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 30px;">
+                        <div>
+                            <h2 style="color: var(--color-primary); margin: 0 0 10px 0;">INVOICE</h2>
+                            <p><strong>Invoice No:</strong> ${rental.invoice_number}</p>
+                            <p><strong>Date:</strong> ${formatDateDisplay(new Date().toISOString().split('T')[0])}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <h3>Bill To:</h3>
+                            <p><strong>${rental.customer_name || 'N/A'}</strong></p>
+                            <p>Phone: ${rental.customer_phone}</p>
+                            ${rental.customer_address ? `<p>${rental.customer_address}</p>` : ''}
+                        </div>
+                    </div>
+                    
+                    <!-- Rental Period -->
+                    <div style="background: var(--color-bg-1); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <h4>Rental Period</h4>
+                        <p><strong>From:</strong> ${formatDateDisplay(rental.start_date)} <strong>To:</strong> ${formatDateDisplay(rental.return_date)}</p>
+                        <p><strong>Duration:</strong> ${rental.days} day${rental.days > 1 ? 's' : ''}</p>
+                    </div>
+                    
+                    <!-- Items Table -->
+                    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+                        <thead>
+                            <tr style="background: var(--color-primary); color: white;">
+                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">S.No</th>
+                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Item Description</th>
+                                <th style="padding: 10px; text-align: left; border: 1px solid #ddd;">Category</th>
+                                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Qty</th>
+                                <th style="padding: 10px; text-align: right; border: 1px solid #ddd;">Rate/Day</th>
+                                <th style="padding: 10px; text-align: center; border: 1px solid #ddd;">Days</th>
+                                <th style="padding: 10px; text-align: right; border: 1px solid #ddd;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rental.items.map((item, index) => `
+                                <tr>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${index + 1}</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${item.name}</td>
+                                    <td style="padding: 8px; border: 1px solid #ddd;">${item.category}</td>
+                                    <td style="padding: 8px; text-align: center; border: 1px solid #ddd;">${item.quantity}</td>
+                                    <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">${formatCurrency(item.rate)}</td>
+                                    <td style="padding: 8px; text-align: center; border: 1px solid #ddd;">${item.days}</td>
+                                    <td style="padding: 8px; text-align: right; border: 1px solid #ddd;">${formatCurrency(item.total)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    
+                    <!-- Totals -->
+                    <div style="text-align: right; margin-bottom: 30px;">
+                        <div style="display: inline-block; min-width: 300px;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>Subtotal:</span>
+                                <span>${formatCurrency(rental.subtotal)}</span>
+                            </div>
+                            ${invoiceSettings.show_gst ? `
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span>GST (${invoiceSettings.tax_rate}%):</span>
+                                    <span>${formatCurrency(rental.gst_amount)}</span>
+                                </div>
+                            ` : ''}
+                            <div style="display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; border-top: 2px solid var(--color-primary); padding-top: 10px;">
+                                <span>Total Amount:</span>
+                                <span style="color: var(--color-primary);">${formatCurrency(rental.total_amount)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Terms and Footer -->
+                    ${invoiceSettings.terms ? `
+                        <div style="margin-bottom: 20px;">
+                            <h4>Terms and Conditions</h4>
+                            <p style="font-size: 12px; color: var(--color-text-secondary);">${invoiceSettings.terms}</p>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="text-align: center; border-top: 1px solid var(--color-border); padding-top: 20px; color: var(--color-text-secondary);">
+                        <p>${invoiceSettings.footer}</p>
+                        <p style="font-size: 12px;">Generated on ${formatDateDisplay(new Date().toISOString().split('T')[0])}</p>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn btn--primary" onclick="window.print()" style="margin-right: 10px;">Print Invoice</button>
+                        <button class="btn btn--success" onclick="sendWhatsAppInvoice('${rentalId}'); closeCenterPanel();">Send via WhatsApp</button>
+                    </div>
+                </div>
+            `;
+            
+            showCenterPanel('Invoice Preview', invoiceHTML);
+        }
+        
+        function sendWhatsAppInvoice(rentalId) {
+            const rental = appData.rentals.find(r => r.id === rentalId);
+            if (!rental) return;
+            
+            const company = appData.settings.company;
+            const itemsText = rental.items.map(item => 
+                `• ${item.name} (${item.quantity}x) - ${formatCurrency(item.total)}`
+            ).join('\n');
+            
+            const message = `🧾 *INVOICE - ${rental.invoice_number}*
+📅 Date: ${formatDateDisplay(new Date().toISOString().split('T')[0])}
+
+👤 Customer: ${rental.customer_name || 'N/A'}
+📱 Phone: ${rental.customer_phone}
+
+📋 *RENTAL DETAILS:*
+Period: ${formatDateDisplay(rental.start_date)} to ${formatDateDisplay(rental.return_date)} (${rental.days} day${rental.days > 1 ? 's' : ''})
+
+${itemsText}
+
+💰 Subtotal: ${formatCurrency(rental.subtotal)}
+🏦 GST (${appData.settings.invoice.tax_rate}%): ${formatCurrency(rental.gst_amount)}
+💳 *TOTAL AMOUNT: ${formatCurrency(rental.total_amount)}*
+
+Thank you for choosing ${company.name || 'RMK Restaurant Management'}!`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            showToast('Opening WhatsApp...');
+        }
+        
+        // Inventory Section
+        function renderInventory() {
+            const inventoryHTML = `
+                <div class="section-header">
+                    <h1 class="section-title">Inventory Status</h1>
+                    <div class="flex gap-16">
+                        <input type="text" class="form-control" id="inventory-search" placeholder="Search utensils..." style="width: 300px;">
+                        <select class="form-control" id="inventory-category-filter" style="width: 200px;">
+                            <option value="">All Categories</option>
+                            ${Object.keys(appData.categories).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Utensil Name</th>
+                                <th>Rate/Day</th>
+                                <th>Max Qty</th>
+                                <th>Available</th>
+                                <th>On Rent</th>
+                                <th>Utilization</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            <!-- Inventory rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('inventory').innerHTML = inventoryHTML;
+            setupInventoryFilters();
+            renderInventoryTable();
+        }
+        
+        function setupInventoryFilters() {
+            const searchInput = document.getElementById('inventory-search');
+            const categoryFilter = document.getElementById('inventory-category-filter');
+            
+            const debouncedRender = debounce(renderInventoryTable, 300);
+            
+            searchInput.addEventListener('input', debouncedRender);
+            categoryFilter.addEventListener('change', renderInventoryTable);
+        }
+        
+        function renderInventoryTable() {
+            const tbody = document.getElementById('inventory-table-body');
+            const searchTerm = document.getElementById('inventory-search')?.value.toLowerCase() || '';
+            const categoryFilter = document.getElementById('inventory-category-filter')?.value || '';
+            
+            const allUtensils = [];
+            
+            for (let mainCat in appData.categories) {
+                for (let subCat in appData.categories[mainCat]) {
+                    appData.categories[mainCat][subCat].items.forEach(item => {
+                        allUtensils.push({
+                            ...item,
+                            mainCategory: mainCat,
+                            subCategory: subCat,
+                            fullCategory: `${mainCat} > ${subCat}`
+                        });
+                    });
+                }
+            }
+            
+            let filteredUtensils = allUtensils;
+            
+            // Filter by category
+            if (categoryFilter) {
+                filteredUtensils = filteredUtensils.filter(item => item.mainCategory === categoryFilter);
+            }
+            
+            // Filter by search term
+            if (searchTerm) {
+                filteredUtensils = filteredUtensils.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) ||
+                    item.fullCategory.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredUtensils.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center">No items found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = filteredUtensils.map(item => {
+                const onRent = item.max_quantity - item.available_quantity;
+                const utilizationPercent = (onRent / item.max_quantity) * 100;
+                
+                let statusClass = 'success';
+                let statusText = 'Available';
+                
+                if (item.available_quantity === 0) {
+                    statusClass = 'error';
+                    statusText = 'Out of Stock';
+                } else if (utilizationPercent > 90) {
+                    statusClass = 'warning';
+                    statusText = 'Low Stock';
+                }
+                
+                return `
+                    <tr>
+                        <td>${item.fullCategory}</td>
+                        <td><strong>${item.name}</strong></td>
+                        <td class="currency">${formatCurrency(item.rate)}</td>
+                        <td>${item.max_quantity}</td>
+                        <td>${item.available_quantity}</td>
+                        <td>${onRent}</td>
+                        <td>${Math.round(utilizationPercent)}%</td>
+                        <td>
+                            <div class="status status--${statusClass}">
+                                ${statusText}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        // Make functions globally available for onclick handlers
+        window.removeRentalItem = removeRentalItem;
+        window.returnRental = returnRental;
+        window.deleteRental = deleteRental;
+        window.generateInvoice = generateInvoice;
+        window.sendWhatsAppInvoice = sendWhatsAppInvoice;
+        window.performClearAllData = performClearAllData;
+        window.closeCenterPanel = closeCenterPanel;
+        
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            renderDashboard();
+        });
+        
+        // Customers Section
+        function renderCustomers() {
+            const customersHTML = `
+                <div class="section-header">
+                    <h1 class="section-title">Customer Management</h1>
+                    <button class="btn btn--primary" id="add-customer-btn">+ Add Customer</button>
+                </div>
+                
+                <div class="card mb-24">
+                    <div class="card-body">
+                        <div class="flex gap-16">
+                            <div class="form-group">
+                                <label class="form-label">Search Customers</label>
+                                <input type="text" class="form-control" id="customer-search" placeholder="Search by name or phone...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Total Rentals</th>
+                                <th>Last Rental</th>
+                                <th>Active Rentals</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customers-table-body">
+                            <!-- Customer rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('customers').innerHTML = customersHTML;
+            setupCustomersEvents();
+            renderCustomersTable();
+        }
+        
+        function setupCustomersEvents() {
+            const searchInput = document.getElementById('customer-search');
+            const addBtn = document.getElementById('add-customer-btn');
+            
+            const debouncedRender = debounce(renderCustomersTable, 300);
+            searchInput.addEventListener('input', debouncedRender);
+            addBtn.addEventListener('click', showAddCustomerForm);
+        }
+        
+        function renderCustomersTable() {
+            const tbody = document.getElementById('customers-table-body');
+            const searchTerm = document.getElementById('customer-search')?.value.toLowerCase() || '';
+            
+            let filteredCustomers = appData.customers;
+            
+            if (searchTerm) {
+                filteredCustomers = filteredCustomers.filter(customer => 
+                    customer.name.toLowerCase().includes(searchTerm) ||
+                    customer.phone.includes(searchTerm)
+                );
+            }
+            
+            if (filteredCustomers.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" class="text-center">No customers found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = filteredCustomers.map(customer => `
+                <tr>
+                    <td><strong>${customer.name}</strong></td>
+                    <td>${customer.phone}</td>
+                    <td>${customer.email || 'N/A'}</td>
+                    <td>${customer.total_rentals}</td>
+                    <td>${customer.last_rental_date ? formatDateDisplay(customer.last_rental_date) : 'Never'}</td>
+                    <td>
+                        ${customer.active_rentals > 0 ? `<span class="status status--warning">${customer.active_rentals} Active</span>` : '<span class="status status--success">None</span>'}
+                    </td>
+                    <td>
+                        <div class="flex gap-4">
+                            <button class="btn btn--secondary btn--sm edit-customer-btn" data-id="${customer.id}">Edit</button>
+                            <button class="btn btn--info btn--sm view-customer-history-btn" data-id="${customer.id}">History</button>
+                            <button class="btn btn--primary btn--sm quick-rental-btn" data-phone="${customer.phone}">Quick Rental</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+        
+        function showAddCustomerForm(editingCustomer = null) {
+            const isEdit = editingCustomer !== null;
+            const title = isEdit ? 'Edit Customer' : 'Add New Customer';
+            
+            const formHTML = `
+                <form id="customer-form">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Customer Name *</label>
+                            <input type="text" class="form-control" id="cust-name" 
+                                   value="${isEdit ? editingCustomer.name : ''}" 
+                                   placeholder="Customer name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-control" id="cust-phone" 
+                                   value="${isEdit ? editingCustomer.phone : ''}" 
+                                   placeholder="10-digit phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="cust-email" 
+                               value="${isEdit ? editingCustomer.email || '' : ''}" 
+                               placeholder="customer@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" id="cust-address" 
+                                  placeholder="Customer address">${isEdit ? editingCustomer.address || '' : ''}</textarea>
+                    </div>
+                    
+                    <div class="flex gap-16">
+                        <button type="submit" class="btn btn--primary">${isEdit ? 'Update Customer' : 'Add Customer'}</button>
+                        <button type="button" class="btn btn--secondary" onclick="closeCenterPanel()">Cancel</button>
+                    </div>
+                </form>
+            `;
+            
+            showCenterPanel(title, formHTML);
+            
+            document.getElementById('customer-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('cust-name').value.trim(),
+                    phone: document.getElementById('cust-phone').value.trim(),
+                    email: document.getElementById('cust-email').value.trim(),
+                    address: document.getElementById('cust-address').value.trim()
+                };
+                
+                if (!formData.name || !formData.phone || formData.phone.length < 10) {
+                    showToast('Name and valid phone number are required', 'error');
+                    return;
+                }
+                
+                if (isEdit) {
+                    Object.assign(editingCustomer, formData);
+                } else {
+                    // Check if customer already exists
+                    const existingCustomer = appData.customers.find(c => c.phone === formData.phone);
+                    if (existingCustomer) {
+                        showToast('Customer with this phone number already exists', 'error');
+                        return;
+                    }
+                    
+                    const newCustomer = {
+                        id: generateId('CUST', appData.customers),
+                        ...formData,
+                        total_rentals: 0,
+                        last_rental_date: null,
+                        active_rentals: 0
+                    };
+                    
+                    appData.customers.push(newCustomer);
+                }
+                
+                saveData();
+                showToast(`Customer ${isEdit ? 'updated' : 'added'} successfully`);
+                closeCenterPanel();
+                renderCustomersTable();
+            });
+        }
+        
+        // Analytics Section
+        function renderAnalytics() {
+            const analyticsHTML = `
+                <div class="section-header">
+                    <h1 class="section-title">Analytics & Reports</h1>
+                    <div class="flex gap-8">
+                        <select class="form-control" id="analytics-period" style="width: 200px;">
+                            <option value="week">Last Week</option>
+                            <option value="month" selected>Last Month</option>
+                            <option value="3months">Last 3 Months</option>
+                            <option value="year">Last Year</option>
+                            <option value="custom">Custom Range</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Revenue Analytics -->
+                <div class="grid-2 mb-24">
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 20px;">Revenue Overview</h3>
+                        <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="stat-card">
+                                <div class="stat-value currency" id="total-revenue">₹0</div>
+                                <div class="stat-label">Total Revenue</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value currency" id="avg-rental-value">₹0</div>
+                                <div class="stat-label">Avg. Rental Value</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3 style="margin-bottom: 20px;">Customer Analytics</h3>
+                        <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="stat-card">
+                                <div class="stat-value" id="total-customers">0</div>
+                                <div class="stat-label">Total Customers</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" id="repeat-customers">0%</div>
+                                <div class="stat-label">Repeat Customers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Popular Items Chart -->
+                <div class="chart-container mb-24">
+                    <h3 style="margin-bottom: 20px;">Most Popular Items</h3>
+                    <div id="popular-items-chart"></div>
+                </div>
+                
+                <!-- Revenue by Category -->
+                <div class="chart-container mb-24">
+                    <h3 style="margin-bottom: 20px;">Revenue by Category</h3>
+                    <div id="category-revenue-chart"></div>
+                </div>
+                
+                <!-- Inventory Analytics -->
+                <div class="chart-container">
+                    <h3 style="margin-bottom: 20px;">Inventory Insights</h3>
+                    <div class="grid-3">
+                        <div class="stat-card">
+                            <div class="stat-value currency" id="inventory-value">₹0</div>
+                            <div class="stat-label">Total Inventory Value</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="utilization-rate">0%</div>
+                            <div class="stat-label">Avg. Utilization Rate</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value" id="low-stock-items">0</div>
+                            <div class="stat-label">Low Stock Items</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('analytics').innerHTML = analyticsHTML;
+            setupAnalyticsEvents();
+            renderAnalyticsData();
+        }
+        
+        function setupAnalyticsEvents() {
+            const periodSelect = document.getElementById('analytics-period');
+            periodSelect.addEventListener('change', renderAnalyticsData);
+        }
+        
+        function renderAnalyticsData() {
+            const period = document.getElementById('analytics-period')?.value || 'month';
+            const dateRange = getDateRange(period);
+            
+            // Filter data by date range
+            const filteredRentals = appData.rentals.filter(rental => {
+                const rentalDate = new Date(rental.start_date);
+                return rentalDate >= dateRange.start && rentalDate <= dateRange.end;
+            });
+            
+            const filteredTransactions = appData.transactions.filter(transaction => {
+                const transactionDate = new Date(transaction.date);
+                return transactionDate >= dateRange.start && transactionDate <= dateRange.end &&
+                       transaction.type === 'Rental Payment' && transaction.status === 'Completed';
+            });
+            
+            // Calculate revenue analytics
+            const totalRevenue = filteredTransactions.reduce((sum, t) => sum + t.amount, 0);
+            const avgRentalValue = filteredRentals.length > 0 ? totalRevenue / filteredRentals.length : 0;
+            
+            document.getElementById('total-revenue').textContent = formatCurrency(totalRevenue);
+            document.getElementById('avg-rental-value').textContent = formatCurrency(avgRentalValue);
+            
+            // Customer analytics
+            const totalCustomers = appData.customers.length;
+            const customersWithMultipleRentals = appData.customers.filter(c => c.total_rentals > 1).length;
+            const repeatCustomerRate = totalCustomers > 0 ? Math.round((customersWithMultipleRentals / totalCustomers) * 100) : 0;
+            
+            document.getElementById('total-customers').textContent = totalCustomers;
+            document.getElementById('repeat-customers').textContent = repeatCustomerRate + '%';
+            
+            // Popular items chart
+            renderPopularItemsChart(filteredRentals);
+            
+            // Category revenue chart
+            renderCategoryRevenueChart(filteredRentals);
+            
+            // Inventory analytics
+            renderInventoryAnalytics();
+        }
+        
+        function getDateRange(period) {
+            const now = new Date();
+            const start = new Date();
+            
+            switch (period) {
+                case 'week':
+                    start.setDate(now.getDate() - 7);
+                    break;
+                case 'month':
+                    start.setMonth(now.getMonth() - 1);
+                    break;
+                case '3months':
+                    start.setMonth(now.getMonth() - 3);
+                    break;
+                case 'year':
+                    start.setFullYear(now.getFullYear() - 1);
+                    break;
+                default:
+                    start.setMonth(now.getMonth() - 1);
+            }
+            
+            return { start, end: now };
+        }
+        
+        function renderPopularItemsChart(rentals) {
+            const container = document.getElementById('popular-items-chart');
+            
+            // Calculate item popularity
+            const itemStats = {};
+            
+            rentals.forEach(rental => {
+                rental.items.forEach(item => {
+                    if (!itemStats[item.name]) {
+                        itemStats[item.name] = { count: 0, revenue: 0 };
+                    }
+                    itemStats[item.name].count += item.quantity;
+                    itemStats[item.name].revenue += item.total;
+                });
+            });
+            
+            const sortedItems = Object.entries(itemStats)
+                .sort(([,a], [,b]) => b.count - a.count)
+                .slice(0, 10);
+            
+            if (sortedItems.length === 0) {
+                container.innerHTML = '<p class="text-center">No data available</p>';
+                return;
+            }
+            
+            const maxCount = Math.max(...sortedItems.map(([,stats]) => stats.count));
+            
+            container.innerHTML = sortedItems.map(([name, stats]) => {
+                const percentage = (stats.count / maxCount) * 100;
+                return `
+                    <div class="chart-bar">
+                        <div class="chart-label">${name}</div>
+                        <div class="chart-bar-fill" style="width: ${percentage}%"></div>
+                        <div class="chart-value">${stats.count} rentals</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderCategoryRevenueChart(rentals) {
+            const container = document.getElementById('category-revenue-chart');
+            
+            // Calculate category revenue
+            const categoryStats = {};
+            
+            rentals.forEach(rental => {
+                rental.items.forEach(item => {
+                    const category = item.category.split(' > ')[0]; // Main category
+                    if (!categoryStats[category]) {
+                        categoryStats[category] = 0;
+                    }
+                    categoryStats[category] += item.total;
+                });
+            });
+            
+            const sortedCategories = Object.entries(categoryStats)
+                .sort(([,a], [,b]) => b - a);
+            
+            if (sortedCategories.length === 0) {
+                container.innerHTML = '<p class="text-center">No data available</p>';
+                return;
+            }
+            
+            const maxRevenue = Math.max(...sortedCategories.map(([,revenue]) => revenue));
+            
+            container.innerHTML = sortedCategories.map(([category, revenue]) => {
+                const percentage = (revenue / maxRevenue) * 100;
+                return `
+                    <div class="chart-bar">
+                        <div class="chart-label">${category}</div>
+                        <div class="chart-bar-fill" style="width: ${percentage}%"></div>
+                        <div class="chart-value">${formatCurrency(revenue)}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderInventoryAnalytics() {
+            const allUtensils = getAllUtensils();
+            
+            // Calculate total inventory value
+            const totalInventoryValue = allUtensils.reduce((sum, item) => 
+                sum + (item.max_quantity * item.rate), 0
+            );
+            
+            // Calculate average utilization rate
+            const totalUtilization = allUtensils.reduce((sum, item) => {
+                const utilization = ((item.max_quantity - item.available_quantity) / item.max_quantity) * 100;
+                return sum + utilization;
+            }, 0);
+            const avgUtilization = allUtensils.length > 0 ? Math.round(totalUtilization / allUtensils.length) : 0;
+            
+            // Count low stock items
+            const lowStockItems = allUtensils.filter(item => {
+                const utilization = ((item.max_quantity - item.available_quantity) / item.max_quantity) * 100;
+                return utilization > 90 || item.available_quantity < 10;
+            }).length;
+            
+            document.getElementById('inventory-value').textContent = formatCurrency(totalInventoryValue);
+            document.getElementById('utilization-rate').textContent = avgUtilization + '%';
+            document.getElementById('low-stock-items').textContent = lowStockItems;
+        }
+        
+        // Transactions Section
+        function renderTransactions() {
+            const transactionsHTML = `
+                <div class="section-header">
+                    <h1 class="section-title">Transaction History</h1>
+                    <button class="btn btn--primary" id="add-transaction-btn">+ Add Transaction</button>
+                </div>
+                
+                <div class="card mb-24">
+                    <div class="card-body">
+                        <div class="grid-4">
+                            <div class="form-group">
+                                <label class="form-label">Filter by Type</label>
+                                <select class="form-control" id="transaction-type-filter">
+                                    <option value="">All Types</option>
+                                    <option value="Rental Payment">Rental Payment</option>
+                                    <option value="Security Deposit">Security Deposit</option>
+                                    <option value="Refund">Refund</option>
+                                    <option value="Late Fee">Late Fee</option>
+                                    <option value="Damage Charge">Damage Charge</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Filter by Status</label>
+                                <select class="form-control" id="transaction-status-filter">
+                                    <option value="">All Statuses</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Held">Held</option>
+                                    <option value="Refunded">Refunded</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">From Date</label>
+                                <input type="date" class="form-control" id="transaction-from-date">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">To Date</label>
+                                <input type="date" class="form-control" id="transaction-to-date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Search Customer</label>
+                            <input type="text" class="form-control" id="transaction-search" placeholder="Search by customer name or phone...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Transaction ID</th>
+                                <th>Date & Time</th>
+                                <th>Type</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Payment Method</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-table-body">
+                            <!-- Transaction rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            document.getElementById('transactions').innerHTML = transactionsHTML;
+            setupTransactionsEvents();
+            renderTransactionsTable();
+        }
+        
+        function setupTransactionsEvents() {
+            const typeFilter = document.getElementById('transaction-type-filter');
+            const statusFilter = document.getElementById('transaction-status-filter');
+            const fromDate = document.getElementById('transaction-from-date');
+            const toDate = document.getElementById('transaction-to-date');
+            const searchInput = document.getElementById('transaction-search');
+            const addBtn = document.getElementById('add-transaction-btn');
+            
+            const debouncedRender = debounce(renderTransactionsTable, 300);
+            
+            typeFilter.addEventListener('change', renderTransactionsTable);
+            statusFilter.addEventListener('change', renderTransactionsTable);
+            fromDate.addEventListener('change', renderTransactionsTable);
+            toDate.addEventListener('change', renderTransactionsTable);
+            searchInput.addEventListener('input', debouncedRender);
+            addBtn.addEventListener('click', showAddTransactionForm);
+        }
+        
+        function renderTransactionsTable() {
+            const tbody = document.getElementById('transactions-table-body');
+            const typeFilter = document.getElementById('transaction-type-filter')?.value || '';
+            const statusFilter = document.getElementById('transaction-status-filter')?.value || '';
+            const fromDate = document.getElementById('transaction-from-date')?.value || '';
+            const toDate = document.getElementById('transaction-to-date')?.value || '';
+            const searchTerm = document.getElementById('transaction-search')?.value.toLowerCase() || '';
+            
+            let filteredTransactions = appData.transactions;
+            
+            // Apply filters
+            if (typeFilter) {
+                filteredTransactions = filteredTransactions.filter(t => t.type === typeFilter);
+            }
+            
+            if (statusFilter) {
+                filteredTransactions = filteredTransactions.filter(t => t.status === statusFilter);
+            }
+            
+            if (fromDate) {
+                filteredTransactions = filteredTransactions.filter(t => 
+                    new Date(t.date) >= new Date(fromDate)
+                );
+            }
+            
+            if (toDate) {
+                filteredTransactions = filteredTransactions.filter(t => 
+                    new Date(t.date) <= new Date(toDate + 'T23:59:59')
+                );
+            }
+            
+            if (searchTerm) {
+                filteredTransactions = filteredTransactions.filter(t => 
+                    t.customer_name.toLowerCase().includes(searchTerm) ||
+                    t.customer_phone.includes(searchTerm)
+                );
+            }
+            
+            // Sort by date (newest first)
+            filteredTransactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            if (filteredTransactions.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center">No transactions found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = filteredTransactions.map(transaction => {
+                const date = new Date(transaction.date);
+                const statusClass = transaction.status === 'Completed' ? 'success' : 
+                                  transaction.status === 'Pending' ? 'warning' : 
+                                  transaction.status === 'Refunded' ? 'info' : 'error';
+                
+                return `
+                    <tr>
+                        <td><strong>${transaction.id}</strong></td>
+                        <td>
+                            ${formatDateDisplay(transaction.date.split('T')[0])}<br>
+                            <small>${date.toLocaleTimeString('en-IN', {hour: '2-digit', minute: '2-digit'})}</small>
+                        </td>
+                        <td>${transaction.type}</td>
+                        <td>
+                            ${transaction.customer_name}<br>
+                            <small>${transaction.customer_phone}</small>
+                        </td>
+                        <td class="currency">${formatCurrency(transaction.amount)}</td>
+                        <td>
+                            <div class="status status--${statusClass}">
+                                ${transaction.status.toUpperCase()}
+                            </div>
+                        </td>
+                        <td>${transaction.payment_method}</td>
+                        <td>
+                            <div class="flex gap-4">
+                                <button class="btn btn--secondary btn--sm edit-transaction-btn" data-id="${transaction.id}">Edit</button>
+                                <button class="btn btn--error btn--sm delete-transaction-btn" data-id="${transaction.id}">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+        
+        function showAddTransactionForm(editingTransaction = null) {
+            const isEdit = editingTransaction !== null;
+            const title = isEdit ? 'Edit Transaction' : 'Add New Transaction';
+            
+            const formHTML = `
+                <form id="transaction-form">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Transaction Type *</label>
+                            <select class="form-control" id="trans-type" required>
+                                <option value="">Select Type</option>
+                                <option value="Rental Payment" ${isEdit && editingTransaction.type === 'Rental Payment' ? 'selected' : ''}>Rental Payment</option>
+                                <option value="Security Deposit" ${isEdit && editingTransaction.type === 'Security Deposit' ? 'selected' : ''}>Security Deposit</option>
+                                <option value="Refund" ${isEdit && editingTransaction.type === 'Refund' ? 'selected' : ''}>Refund</option>
+                                <option value="Late Fee" ${isEdit && editingTransaction.type === 'Late Fee' ? 'selected' : ''}>Late Fee</option>
+                                <option value="Damage Charge" ${isEdit && editingTransaction.type === 'Damage Charge' ? 'selected' : ''}>Damage Charge</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Amount (₹) *</label>
+                            <input type="number" class="form-control" id="trans-amount" 
+                                   value="${isEdit ? editingTransaction.amount : ''}" 
+                                   placeholder="Transaction amount" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Customer Name *</label>
+                            <input type="text" class="form-control" id="trans-customer-name" 
+                                   value="${isEdit ? editingTransaction.customer_name : ''}" 
+                                   placeholder="Customer name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Customer Phone *</label>
+                            <input type="tel" class="form-control" id="trans-customer-phone" 
+                                   value="${isEdit ? editingTransaction.customer_phone : ''}" 
+                                   placeholder="Phone number" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <select class="form-control" id="trans-status">
+                                <option value="Completed" ${isEdit && editingTransaction.status === 'Completed' ? 'selected' : ''}>Completed</option>
+                                <option value="Pending" ${isEdit && editingTransaction.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Held" ${isEdit && editingTransaction.status === 'Held' ? 'selected' : ''}>Held</option>
+                                <option value="Refunded" ${isEdit && editingTransaction.status === 'Refunded' ? 'selected' : ''}>Refunded</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Payment Method</label>
+                            <select class="form-control" id="trans-payment-method">
+                                <option value="Cash" ${isEdit && editingTransaction.payment_method === 'Cash' ? 'selected' : ''}>Cash</option>
+                                <option value="UPI" ${isEdit && editingTransaction.payment_method === 'UPI' ? 'selected' : ''}>UPI</option>
+                                <option value="Card" ${isEdit && editingTransaction.payment_method === 'Card' ? 'selected' : ''}>Card</option>
+                                <option value="Net Banking" ${isEdit && editingTransaction.payment_method === 'Net Banking' ? 'selected' : ''}>Net Banking</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Rental ID (if applicable)</label>
+                        <input type="text" class="form-control" id="trans-rental-id" 
+                               value="${isEdit ? editingTransaction.rental_id || '' : ''}" 
+                               placeholder="RNT-001">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="trans-description" 
+                                  placeholder="Transaction description">${isEdit ? editingTransaction.description || '' : ''}</textarea>
+                    </div>
+                    
+                    <div class="flex gap-16">
+                        <button type="submit" class="btn btn--primary">${isEdit ? 'Update Transaction' : 'Add Transaction'}</button>
+                        <button type="button" class="btn btn--secondary" onclick="closeCenterPanel()">Cancel</button>
+                    </div>
+                </form>
+            `;
+            
+            showCenterPanel(title, formHTML);
+            
+            document.getElementById('transaction-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    type: document.getElementById('trans-type').value,
+                    amount: parseFloat(document.getElementById('trans-amount').value),
+                    customer_name: document.getElementById('trans-customer-name').value.trim(),
+                    customer_phone: document.getElementById('trans-customer-phone').value.trim(),
+                    status: document.getElementById('trans-status').value,
+                    payment_method: document.getElementById('trans-payment-method').value,
+                    rental_id: document.getElementById('trans-rental-id').value.trim(),
+                    description: document.getElementById('trans-description').value.trim()
+                };
+                
+                if (!formData.type || !formData.amount || !formData.customer_name || !formData.customer_phone) {
+                    showToast('Please fill all required fields', 'error');
+                    return;
+                }
+                
+                if (isEdit) {
+                    Object.assign(editingTransaction, formData);
+                } else {
+                    const newTransaction = {
+                        id: generateId('TXN', appData.transactions),
+                        date: new Date().toISOString(),
+                        ...formData
+                    };
+                    
+                    appData.transactions.push(newTransaction);
+                }
+                
+                saveData();
+                showToast(`Transaction ${isEdit ? 'updated' : 'added'} successfully`);
+                closeCenterPanel();
+                renderTransactionsTable();
+            });
+        }
+        
+        // Settings Section
+        function renderSettings() {
+            const settingsHTML = `
+                <div class="section-header">
+                    <h1 class="section-title">Settings</h1>
+                </div>
+                
+                <div class="grid-2 gap-24">
+                    <!-- Company Settings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Company Details</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="company-settings-form">
+                                <div class="form-group">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" class="form-control" id="company-name" 
+                                           value="${appData.settings.company.name}" placeholder="Company name">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Address</label>
+                                    <textarea class="form-control" id="company-address" 
+                                              placeholder="Complete address">${appData.settings.company.address}</textarea>
+                                </div>
+                                
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone</label>
+                                        <input type="tel" class="form-control" id="company-phone" 
+                                               value="${appData.settings.company.phone}" placeholder="Contact number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="company-email" 
+                                               value="${appData.settings.company.email}" placeholder="Email address">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">GST Number</label>
+                                    <input type="text" class="form-control" id="company-gst" 
+                                           value="${appData.settings.company.gst_number}" placeholder="GST registration number">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Logo URL</label>
+                                    <input type="url" class="form-control" id="company-logo" 
+                                           value="${appData.settings.company.logo_url}" placeholder="https://example.com/logo.png">
+                                </div>
+                                
+                                <button type="submit" class="btn btn--primary">Save Company Details</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Invoice Settings -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Invoice Configuration</h3>
+                        </div>
+                        <div class="card-body">
+                            <form id="invoice-settings-form">
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <label class="form-label">Invoice Prefix</label>
+                                        <input type="text" class="form-control" id="invoice-prefix" 
+                                               value="${appData.settings.invoice.number_prefix}" placeholder="INV">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Current Number</label>
+                                        <input type="number" class="form-control" id="invoice-current" 
+                                               value="${appData.settings.invoice.current_number}" min="1">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Tax Rate (%)</label>
+                                    <input type="number" class="form-control" id="tax-rate" 
+                                           value="${appData.settings.invoice.tax_rate}" min="0" max="100" step="0.01">
+                                </div>
+                                
+                                <div class="grid-2">
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <input type="checkbox" id="show-days" 
+                                                   ${appData.settings.invoice.show_days ? 'checked' : ''}>
+                                            Show Days Calculation
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            <input type="checkbox" id="show-gst" 
+                                                   ${appData.settings.invoice.show_gst ? 'checked' : ''}>
+                                            Show GST Breakdown
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Terms and Conditions</label>
+                                    <textarea class="form-control" id="invoice-terms" 
+                                              placeholder="Invoice terms and conditions">${appData.settings.invoice.terms}</textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Footer Message</label>
+                                    <input type="text" class="form-control" id="invoice-footer" 
+                                           value="${appData.settings.invoice.footer}" placeholder="Thank you message">
+                                </div>
+                                
+                                <button type="submit" class="btn btn--primary">Save Invoice Settings</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Management -->
+                <div class="card mt-24">
+                    <div class="card-header">
+                        <h3>Data Management</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="flex gap-16">
+                            <button class="btn btn--secondary" id="export-data-btn">Export All Data</button>
+                            <button class="btn btn--warning" id="import-data-btn">Import Data</button>
+                            <button class="btn btn--error" id="clear-all-data-btn">Clear All Data</button>
+                        </div>
+                        <input type="file" id="import-file-input" accept=".json" style="display: none;">
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('settings').innerHTML = settingsHTML;
+            setupSettingsEvents();
+        }
+        
+        function setupSettingsEvents() {
+            // Company settings form
+            document.getElementById('company-settings-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                appData.settings.company = {
+                    name: document.getElementById('company-name').value.trim(),
+                    address: document.getElementById('company-address').value.trim(),
+                    phone: document.getElementById('company-phone').value.trim(),
+                    email: document.getElementById('company-email').value.trim(),
+                    gst_number: document.getElementById('company-gst').value.trim(),
+                    logo_url: document.getElementById('company-logo').value.trim()
+                };
+                
+                saveData();
+                showToast('Company details saved successfully');
+            });
+            
+            // Invoice settings form
+            document.getElementById('invoice-settings-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                appData.settings.invoice = {
+                    ...appData.settings.invoice,
+                    number_prefix: document.getElementById('invoice-prefix').value.trim(),
+                    current_number: parseInt(document.getElementById('invoice-current').value),
+                    tax_rate: parseFloat(document.getElementById('tax-rate').value),
+                    show_days: document.getElementById('show-days').checked,
+                    show_gst: document.getElementById('show-gst').checked,
+                    terms: document.getElementById('invoice-terms').value.trim(),
+                    footer: document.getElementById('invoice-footer').value.trim()
+                };
+                
+                saveData();
+                showToast('Invoice settings saved successfully');
+            });
+            
+            // Data management
+            document.getElementById('export-data-btn').addEventListener('click', exportData);
+            document.getElementById('import-data-btn').addEventListener('click', () => {
+                document.getElementById('import-file-input').click();
+            });
+            document.getElementById('import-file-input').addEventListener('change', importData);
+            document.getElementById('clear-all-data-btn').addEventListener('click', clearAllData);
+        }
+        
+        function exportData() {
+            const dataStr = JSON.stringify(appData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `rmk-data-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            showToast('Data exported successfully');
+        }
+        
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    appData = importedData;
+                    saveData();
+                    showToast('Data imported successfully. Please refresh the page.');
+                    setTimeout(() => location.reload(), 2000);
+                } catch (error) {
+                    showToast('Invalid file format. Please upload a valid JSON file.', 'error');
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function clearAllData() {
+            const confirmHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <h3 style="color: var(--color-error); margin-bottom: 20px;">⚠️ Clear All Data</h3>
+                    <p style="margin-bottom: 20px;">This will permanently delete ALL data including:</p>
+                    <ul style="text-align: left; margin: 20px 0; color: var(--color-error);">
+                        <li>All rentals and customer data</li>
+                        <li>All utensils and categories</li>
+                        <li>All transactions</li>
+                        <li>Company and invoice settings</li>
+                    </ul>
+                    <p style="margin-bottom: 30px; font-weight: bold;">This action cannot be undone!</p>
+                    <div class="flex gap-16 justify-center">
+                        <button class="btn btn--error" onclick="performClearAllData(); closeCenterPanel();">Yes, Delete Everything</button>
+                        <button class="btn btn--secondary" onclick="closeCenterPanel()">Cancel</button>
+                    </div>
+                </div>
+            `;
+            showCenterPanel('Confirm Clear All Data', confirmHTML);
+        }
+        
+        function performClearAllData() {
+            // Clear in-memory data
+            initializeDefaultData();
+            saveData();
+            showToast('All data cleared. Refreshing page...');
+            setTimeout(() => location.reload(), 2000);
+        }
+        
+        function viewCustomerHistory(customerId) {
+            const customer = appData.customers.find(c => c.id === customerId);
+            if (!customer) return;
+            
+            const customerRentals = appData.rentals.filter(r => r.customer_phone === customer.phone);
+            
+            const historyHTML = `
+                <div style="max-width: 800px;">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h3>${customer.name}</h3>
+                        <p>Phone: ${customer.phone}</p>
+                        <p>Total Rentals: ${customer.total_rentals} | Active: ${customer.active_rentals}</p>
+                    </div>
+                    
+                    ${customerRentals.length === 0 ? 
+                        '<p class="text-center">No rental history found</p>' :
+                        `<div class="table-container">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Rental ID</th>
+                                        <th>Period</th>
+                                        <th>Items</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${customerRentals.map(rental => `
+                                        <tr>
+                                            <td><strong>${rental.id}</strong></td>
+                                            <td>
+                                                ${formatDateDisplay(rental.start_date)} to<br>
+                                                ${formatDateDisplay(rental.return_date)}
+                                            </td>
+                                            <td>${rental.items.length} items</td>
+                                            <td class="currency">${formatCurrency(rental.total_amount)}</td>
+                                            <td>
+                                                <div class="status status--${
+                                                    rental.status === 'active' ? 'info' : 
+                                                    rental.status === 'returned' ? 'success' : 'error'
+                                                }">
+                                                    ${rental.status.toUpperCase()}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>`
+                    }
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="btn btn--primary" onclick="closeCenterPanel()">Close</button>
+                    </div>
+                </div>
+            `;
+            
+            showCenterPanel(`${customer.name} - Rental History`, historyHTML);
+        }
+        
+        function deleteTransaction(transactionId) {
+            const index = appData.transactions.findIndex(t => t.id === transactionId);
+            if (index >= 0) {
+                appData.transactions.splice(index, 1);
+                saveData();
+                showToast('Transaction deleted successfully');
+                renderTransactionsTable();
+            }
+        }
+
+        // Rental Management Functions
+        function showAddRentalForm(editingRental = null) {
+            const isEdit = editingRental !== null;
+            const title = isEdit ? 'Edit Rental' : 'Add New Rental';
+            
+            const formHTML = `
+                <form id="rental-form">
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Customer Phone *</label>
+                            <input type="tel" class="form-control" id="customer-phone" 
+                                   value="${isEdit ? editingRental.customer_phone : ''}" 
+                                   placeholder="10-digit phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Customer Name</label>
+                            <input type="text" class="form-control" id="customer-name" 
+                                   value="${isEdit ? editingRental.customer_name || '' : ''}" 
+                                   placeholder="Customer name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" id="customer-address" 
+                                  placeholder="Customer address">${isEdit ? editingRental.customer_address || '' : ''}</textarea>
+                    </div>
+                    
+                    <div class="grid-3">
+                        <div class="form-group">
+                            <label class="form-label">Start Date *</label>
+                            <input type="date" class="form-control" id="start-date" 
+                                   value="${isEdit ? editingRental.start_date : ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Return Date *</label>
+                            <input type="date" class="form-control" id="return-date" 
+                                   value="${isEdit ? editingRental.return_date : ''}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Verification Proof</label>
+                            <select class="form-control" id="verification-proof">
+                                <option value="">Select Proof</option>
+                                <option value="Aadhar Card" ${isEdit && editingRental.verification_proof === 'Aadhar Card' ? 'selected' : ''}>Aadhar Card</option>
+                                <option value="PAN Card" ${isEdit && editingRental.verification_proof === 'PAN Card' ? 'selected' : ''}>PAN Card</option>
+                                <option value="Driving License" ${isEdit && editingRental.verification_proof === 'Driving License' ? 'selected' : ''}>Driving License</option>
+                                <option value="Passport" ${isEdit && editingRental.verification_proof === 'Passport' ? 'selected' : ''}>Passport</option>
+                                <option value="Voter ID" ${isEdit && editingRental.verification_proof === 'Voter ID' ? 'selected' : ''}>Voter ID</option>
+                                <option value="None" ${isEdit && editingRental.verification_proof === 'None' ? 'selected' : ''}>None</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Utensil Selection -->
+                    <div class="card mb-16">
+                        <div class="card-header">
+                            <h4>Add Utensils</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="grid-4 mb-16">
+                                <div class="form-group">
+                                    <label class="form-label">Main Category</label>
+                                    <select class="form-control" id="main-category-select">
+                                        <option value="">Select Category</option>
+                                        ${Object.keys(appData.categories).map(cat => `<option value="${cat}">${cat}</option>`).join('')}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Sub Category</label>
+                                    <select class="form-control" id="sub-category-select">
+                                        <option value="">Select Sub-Category</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Utensil</label>
+                                    <select class="form-control" id="utensil-select">
+                                        <option value="">Select Utensil</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Quantity</label>
+                                    <input type="number" class="form-control" id="utensil-quantity" min="1" placeholder="Qty">
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn--secondary" id="add-item-btn">Add Item</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Selected Items -->
+                    <div class="rental-items-list" id="rental-items-list">
+                        <h5>Selected Items</h5>
+                        <div id="selected-items-container">
+                            <!-- Items will be added here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Totals -->
+                    <div class="totals-section" id="totals-section">
+                        <div class="total-row">
+                            <span>Rental Period:</span>
+                            <span id="rental-days">0 days</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span class="currency" id="rental-subtotal">₹0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>GST (18%):</span>
+                            <span class="currency" id="rental-gst">₹0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span><strong>Total Amount:</strong></span>
+                            <span class="currency" id="rental-total"><strong>₹0.00</strong></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Notes</label>
+                        <textarea class="form-control" id="rental-notes" 
+                                  placeholder="Additional notes">${isEdit ? editingRental.notes || '' : ''}</textarea>
+                    </div>
+                    
+                    <div class="flex gap-16">
+                        <button type="submit" class="btn btn--primary">${isEdit ? 'Update Rental' : 'Create Rental'}</button>
+                        <button type="button" class="btn btn--secondary" onclick="closeCenterPanel()">Cancel</button>
+                    </div>
+                </form>
+            `;
+            
+            showCenterPanel(title, formHTML);
+            
+            // If editing, populate existing items
+            if (isEdit) {
+                selectedRentalItems = [...editingRental.items];
+                renderSelectedItems();
+                calculateTotals();
+            } else {
+                selectedRentalItems = [];
+            }
+            
+            setupRentalFormEvents();
+        }
+        
+        let selectedRentalItems = [];
+        
+        function setupRentalFormEvents() {
+            const form = document.getElementById('rental-form');
+            const mainCatSelect = document.getElementById('main-category-select');
+            const subCatSelect = document.getElementById('sub-category-select');
+            const utensilSelect = document.getElementById('utensil-select');
+            const addItemBtn = document.getElementById('add-item-btn');
+            
+            // Cascading dropdowns
+            mainCatSelect.addEventListener('change', function() {
+                const mainCat = this.value;
+                subCatSelect.innerHTML = '<option value="">Select Sub-Category</option>';
+                utensilSelect.innerHTML = '<option value="">Select Utensil</option>';
+                
+                if (mainCat && appData.categories[mainCat]) {
+                    for (let subCat in appData.categories[mainCat]) {
+                        subCatSelect.innerHTML += `<option value="${subCat}">${subCat}</option>`;
+                    }
+                }
+            });
+            
+            subCatSelect.addEventListener('change', function() {
+                const mainCat = mainCatSelect.value;
+                const subCat = this.value;
+                utensilSelect.innerHTML = '<option value="">Select Utensil</option>';
+                
+                if (mainCat && subCat && appData.categories[mainCat][subCat]) {
+                    appData.categories[mainCat][subCat].items.forEach(utensil => {
+                        const disabled = utensil.available_quantity === 0 ? 'disabled' : '';
+                        const availText = utensil.available_quantity === 0 ? 'OUT OF STOCK' : `Available: ${utensil.available_quantity}`;
+                        utensilSelect.innerHTML += `
+                            <option value="${utensil.id}" ${disabled}>
+                                ${utensil.name} (₹${utensil.rate}/day) - ${availText}
+                            </option>
+                        `;
+                    });
+                }
+            });
+            
+            // Add item to rental
+            addItemBtn.addEventListener('click', function() {
+                const utensilId = utensilSelect.value;
+                const quantity = parseInt(document.getElementById('utensil-quantity').value);
+                
+                if (!utensilId || !quantity || quantity <= 0) {
+                    showToast('Please select utensil and enter valid quantity', 'error');
+                    return;
+                }
+                
+                const utensil = findUtensilById(utensilId);
+                if (!utensil) {
+                    showToast('Utensil not found', 'error');
+                    return;
+                }
+                
+                if (quantity > utensil.available_quantity) {
+                    showToast(`Only ${utensil.available_quantity} units available`, 'error');
+                    return;
+                }
+                
+                // Check if already added
+                const existingIndex = selectedRentalItems.findIndex(item => item.utensil_id === utensilId);
+                if (existingIndex >= 0) {
+                    selectedRentalItems[existingIndex].quantity += quantity;
+                } else {
+                    selectedRentalItems.push({
+                        utensil_id: utensilId,
+                        name: utensil.name,
+                        category: `${mainCatSelect.value} > ${subCatSelect.value}`,
+                        quantity: quantity,
+                        rate: utensil.rate,
+                        days: 0,
+                        total: 0
+                    });
+                }
+                
+                // Reset form
+                mainCatSelect.value = '';
+                subCatSelect.innerHTML = '<option value="">Select Sub-Category</option>';
+                utensilSelect.innerHTML = '<option value="">Select Utensil</option>';
+                document.getElementById('utensil-quantity').value = '';
+                
+                renderSelectedItems();
+                calculateTotals();
+                showToast('Item added successfully');
+            });
+            
+            // Date change events
+            document.getElementById('start-date').addEventListener('change', calculateTotals);
+            document.getElementById('return-date').addEventListener('change', calculateTotals);
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitRentalForm();
+            });
+        }
+        
+        function renderSelectedItems() {
+            const container = document.getElementById('selected-items-container');
+            
+            if (selectedRentalItems.length === 0) {
+                container.innerHTML = '<p class="text-center">No items selected</p>';
+                return;
+            }
+            
+            container.innerHTML = selectedRentalItems.map((item, index) => `
+                <div class="rental-item">
+                    <div>
+                        <strong>${item.name}</strong><br>
+                        <small>${item.category} - ₹${item.rate}/day</small>
+                    </div>
+                    <div class="text-right">
+                        <div>Qty: ${item.quantity}</div>
+                        <div class="currency">${formatCurrency(item.total)}</div>
+                    </div>
+                    <button type="button" class="btn btn--error btn--sm" onclick="removeRentalItem(${index})">Remove</button>
+                </div>
+            `).join('');
+        }
+        
+        function removeRentalItem(index) {
+            selectedRentalItems.splice(index, 1);
+            renderSelectedItems();
+            calculateTotals();
+            showToast('Item removed');
+        }
+        
+        function calculateTotals() {
+            const startDate = document.getElementById('start-date')?.value;
+            const returnDate = document.getElementById('return-date')?.value;
+            
+            if (!startDate || !returnDate) {
+                document.getElementById('rental-days').textContent = '0 days';
+                return;
+            }
+            
+            const start = new Date(startDate);
+            const end = new Date(returnDate);
+            const days = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
+            
+            document.getElementById('rental-days').textContent = `${days} day${days > 1 ? 's' : ''}`;
+            
+            let subtotal = 0;
+            selectedRentalItems.forEach(item => {
+                item.days = days;
+                item.total = item.quantity * item.rate * days;
+                subtotal += item.total;
+            });
+            
+            const gstAmount = subtotal * (appData.settings.invoice.tax_rate / 100);
+            const totalAmount = subtotal + gstAmount;
+            
+            document.getElementById('rental-subtotal').textContent = formatCurrency(subtotal);
+            document.getElementById('rental-gst').textContent = formatCurrency(gstAmount);
+            document.getElementById('rental-total').textContent = formatCurrency(totalAmount);
+            
+            // Update item display
+            renderSelectedItems();
+        }
+        
+        function submitRentalForm() {
+            const formData = {
+                customer_phone: document.getElementById('customer-phone').value.trim(),
+                customer_name: document.getElementById('customer-name').value.trim(),
+                customer_address: document.getElementById('customer-address').value.trim(),
+                start_date: document.getElementById('start-date').value,
+                return_date: document.getElementById('return-date').value,
+                verification_proof: document.getElementById('verification-proof').value,
+                notes: document.getElementById('rental-notes').value.trim()
+            };
+            
+            // Validation
+            if (!formData.customer_phone || formData.customer_phone.length < 10) {
+                showToast('Valid phone number is required', 'error');
+                return;
+            }
+            
+            if (!formData.start_date || !formData.return_date) {
+                showToast('Start date and return date are required', 'error');
+                return;
+            }
+            
+            if (new Date(formData.return_date) < new Date(formData.start_date)) {
+                showToast('Return date must be after start date', 'error');
+                return;
+            }
+            
+            if (selectedRentalItems.length === 0) {
+                showToast('At least one item must be added', 'error');
+                return;
+            }
+            
+            // Create rental
+            createRental(formData);
+        }
+        
+        function createRental(formData) {
+            const rentalId = generateId('RNT', appData.rentals);
+            const start = new Date(formData.start_date);
+            const end = new Date(formData.return_date);
+            const days = Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
+            
+            let subtotal = 0;
+            selectedRentalItems.forEach(item => {
+                item.days = days;
+                item.total = item.quantity * item.rate * days;
+                subtotal += item.total;
+            });
+            
+            const gstAmount = subtotal * (appData.settings.invoice.tax_rate / 100);
+            const totalAmount = subtotal + gstAmount;
+            
+            const rental = {
+                id: rentalId,
+                ...formData,
+                actual_return_date: null,
+                status: 'active',
+                items: [...selectedRentalItems],
+                days: days,
+                subtotal: subtotal,
+                gst_amount: gstAmount,
+                total_amount: totalAmount,
+                invoice_number: `${appData.settings.invoice.number_prefix}-${appData.settings.invoice.current_number}`
+            };
+            
+            // Update inventory
+            selectedRentalItems.forEach(item => {
+                const utensil = findUtensilById(item.utensil_id);
+                if (utensil) {
+                    utensil.available_quantity -= item.quantity;
+                    utensil.rental_count += 1;
+                }
+            });
+            
+            // Create transaction
+            const transactionId = generateId('TXN', appData.transactions);
+            const transaction = {
+                id: transactionId,
+                date: new Date().toISOString(),
+                type: 'Rental Payment',
+                customer_name: formData.customer_name || 'N/A',
+                customer_phone: formData.customer_phone,
+                amount: totalAmount,
+                rental_id: rentalId,
+                status: 'Completed',
+                payment_method: 'Cash',
+                description: `Rental payment for ${rentalId}`
+            };
+            
+            // Update customer data
+            let customer = appData.customers.find(c => c.phone === formData.customer_phone);
+            if (!customer) {
+                customer = {
+                    id: generateId('CUST', appData.customers),
+                    name: formData.customer_name || 'N/A',
+                    phone: formData.customer_phone,
+                    email: '',
+                    address: formData.customer_address || '',
+                    total_rentals: 0,
+                    last_rental_date: formData.start_date,
+                    active_rentals: 0
+                };
+                appData.customers.push(customer);
+            }
+            customer.total_rentals += 1;
+            customer.last_rental_date = formData.start_date;
+            customer.active_rentals += 1;
+            if (formData.customer_name) customer.name = formData.customer_name;
+            if (formData.customer_address) customer.address = formData.customer_address;
+            
+            // Save data
+            appData.rentals.push(rental);
+            appData.transactions.push(transaction);
+            appData.settings.invoice.current_number += 1;
+            saveData();
+            
+            showToast('Rental created successfully');
+            closeCenterPanel();
+            
+            // Refresh current view
+            if (currentSection === 'rentals') {
+                renderRentals();
+            } else if (currentSection === 'dashboard') {
+                renderDashboard();
+            }
+        }
+        
+        // Utensils Management
+        function renderUtensils() {
+            renderMainCategories();
+            renderSubCategories();
+            renderUtensilsList();
+        }
+        
+        function renderMainCategories() {
+            const container = document.getElementById('main-categories-list');
+            const categories = Object.keys(appData.categories);
+            
+            container.innerHTML = categories.map(category => `
+                <div class="category-item ${selectedMainCategory === category ? 'active' : ''}" 
+                     data-category="${category}">
+                    <span>${category}</span>
+                    <div class="item-actions">
+                        <button class="btn btn--secondary btn--sm action-btn edit-main-category-btn" 
+                                data-category="${category}">Edit</button>
+                        <button class="btn btn--error btn--sm action-btn delete-main-category-btn" 
+                                data-category="${category}">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderSubCategories() {
+            const container = document.getElementById('sub-categories-list');
+            
+            if (!selectedMainCategory) {
+                container.innerHTML = '<p class="text-center">Select a main category first</p>';
+                return;
+            }
+            
+            const subCategories = Object.keys(appData.categories[selectedMainCategory] || {});
+            
+            container.innerHTML = subCategories.map(subCategory => `
+                <div class="category-item ${selectedSubCategory === subCategory ? 'active' : ''}" 
+                     data-subcategory="${subCategory}">
+                    <span>${subCategory}</span>
+                    <div class="item-actions">
+                        <button class="btn btn--secondary btn--sm action-btn edit-sub-category-btn" 
+                                data-subcategory="${subCategory}">Edit</button>
+                        <button class="btn btn--error btn--sm action-btn delete-sub-category-btn" 
+                                data-subcategory="${subCategory}">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderUtensilsList() {
+            const container = document.getElementById('utensils-list');
+            
+            if (!selectedMainCategory || !selectedSubCategory) {
+                container.innerHTML = '<p class="text-center">Select main category and sub-category first</p>';
+                return;
+            }
+            
+            const items = appData.categories[selectedMainCategory]?.[selectedSubCategory]?.items || [];
+            
+            if (items.length === 0) {
+                container.innerHTML = '<p class="text-center">No utensils in this category</p>';
+                return;
+            }
+            
+            container.innerHTML = items.map(item => {
+                const utilizationPercent = ((item.max_quantity - item.available_quantity) / item.max_quantity) * 100;
+                const statusClass = utilizationPercent > 90 ? 'error' : utilizationPercent > 50 ? 'warning' : 'success';
+                
+                return `
+                    <div class="utensil-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>₹${item.rate}/day - ${item.available_quantity}/${item.max_quantity} available</small><br>
+                            <div class="status status--${statusClass}">
+                                ${Math.round(utilizationPercent)}% Utilized
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <button class="btn btn--secondary btn--sm action-btn edit-utensil-btn" 
+                                    data-id="${item.id}">Edit</button>
+                            <button class="btn btn--error btn--sm action-btn delete-utensil-btn" 
+                                    data-id="${item.id}">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function addMainCategory() {
+            const input = document.getElementById('new-main-category');
+            const categoryName = input.value.trim();
+            
+            if (!categoryName) {
+                showToast('Please enter category name', 'error');
+                return;
+            }
+            
+            if (appData.categories[categoryName]) {
+                showToast('Category already exists', 'error');
+                return;
+            }
+            
+            appData.categories[categoryName] = {};
+            saveData();
+            
+            input.value = '';
+            renderMainCategories();
+            showToast('Main category added successfully');
+        }
+        
+        function addSubCategory() {
+            if (!selectedMainCategory) {
+                showToast('Please select a main category first', 'error');
+                return;
+            }
+            
+            const input = document.getElementById('new-sub-category');
+            const subCategoryName = input.value.trim();
+            
+            if (!subCategoryName) {
+                showToast('Please enter sub-category name', 'error');
+                return;
+            }
+            
+            if (appData.categories[selectedMainCategory][subCategoryName]) {
+                showToast('Sub-category already exists', 'error');
+                return;
+            }
+            
+            appData.categories[selectedMainCategory][subCategoryName] = { items: [] };
+            saveData();
+            
+            input.value = '';
+            renderSubCategories();
+            showToast('Sub-category added successfully');
+        }
+        
+        function selectMainCategory(categoryName) {
+            selectedMainCategory = categoryName;
+            selectedSubCategory = null;
+            renderMainCategories();
+            renderSubCategories();
+            renderUtensilsList();
+        }
+        
+        function selectSubCategory(subCategoryName) {
+            selectedSubCategory = subCategoryName;
+            renderSubCategories();
+            renderUtensilsList();
+        }
+        
+        function showAddUtensilForm(editingUtensil = null) {
+            if (!selectedMainCategory || !selectedSubCategory) {
+                showToast('Please select main category and sub-category first', 'error');
+                return;
+            }
+            
+            const isEdit = editingUtensil !== null;
+            const title = isEdit ? 'Edit Utensil' : 'Add New Utensil';
+            
+            const formHTML = `
+                <form id="utensil-form">
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <input type="text" class="form-control" value="${selectedMainCategory} > ${selectedSubCategory}" readonly>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Utensil Name *</label>
+                            <input type="text" class="form-control" id="utensil-name" 
+                                   value="${isEdit ? editingUtensil.name : ''}" 
+                                   placeholder="Enter utensil name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rate per Day (₹) *</label>
+                            <input type="number" class="form-control" id="utensil-rate" 
+                                   value="${isEdit ? editingUtensil.rate : ''}" 
+                                   placeholder="Rate per day" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    
+                    <div class="grid-2">
+                        <div class="form-group">
+                            <label class="form-label">Maximum Quantity *</label>
+                            <input type="number" class="form-control" id="utensil-max-qty" 
+                                   value="${isEdit ? editingUtensil.max_quantity : ''}" 
+                                   placeholder="Total quantity" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Available Quantity *</label>
+                            <input type="number" class="form-control" id="utensil-available-qty" 
+                                   value="${isEdit ? editingUtensil.available_quantity : ''}" 
+                                   placeholder="Available quantity" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="utensil-description" 
+                                  placeholder="Utensil description">${isEdit ? editingUtensil.description || '' : ''}</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Image URL</label>
+                        <input type="url" class="form-control" id="utensil-image" 
+                               value="${isEdit ? editingUtensil.image_url || '' : ''}" 
+                               placeholder="https://example.com/image.jpg">
+                    </div>
+                    
+                    <div class="flex gap-16">
+                        <button type="submit" class="btn btn--primary">${isEdit ? 'Update Utensil' : 'Add Utensil'}</button>
+                        <button type="button" class="btn btn--secondary" onclick="closeCenterPanel()">Cancel</button>
+                    </div>
+                </form>
+            `;
+            
+            showCenterPanel(title, formHTML);
+            
+            // Form submission
+            document.getElementById('utensil-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    name: document.getElementById('utensil-name').value.trim(),
+                    rate: parseFloat(document.getElementById('utensil-rate').value),
+                    max_quantity: parseInt(document.getElementById('utensil-max-qty').value),
+                    available_quantity: parseInt(document.getElementById('utensil-available-qty').value),
+                    description: document.getElementById('utensil-description').value.trim(),
+                    image_url: document.getElementById('utensil-image').value.trim()
+                };
+                
+                // Validation
+                if (!formData.name || !formData.rate || !formData.max_quantity || formData.available_quantity < 0) {
+                    showToast('Please fill all required fields with valid values', 'error');
+                    return;
+                }
+                
+                if (formData.available_quantity > formData.max_quantity) {
+                    showToast('Available quantity cannot exceed maximum quantity', 'error');
+                    return;
+                }
+                
+                if (isEdit) {
+                    // Update existing utensil
+                    const utensil = editingUtensil;
+                    Object.assign(utensil, formData);
+                } else {
+                    // Add new utensil
+                    const newUtensil = {
+                        id: generateId('utl', getAllUtensils()),
+                        ...formData,
+                        rental_count: 0
+                    };
+                    
+                    appData.categories[selectedMainCategory][selectedSubCategory].items.push(newUtensil);
+                }
+                
+                saveData();
+                showToast(`Utensil ${isEdit ? 'updated' : 'added'} successfully`);
+                closeCenterPanel();
+                renderUtensilsList();
+            });
+        }
+        
+        function getAllUtensils() {
+            const utensils = [];
+            for (let mainCat in appData.categories) {
+                for (let subCat in appData.categories[mainCat]) {
+                    utensils.push(...appData.categories[mainCat][subCat].items);
+                }
+            }
+            return utensils;
+        }
+        
+        // Rentals Management
+        function renderRentals() {
+            setupRentalsFilters();
+            renderRentalsTable();
+        }
+        
+        function setupRentalsFilters() {
+            const statusFilter = document.getElementById('rental-status-filter');
+            const searchInput = document.getElementById('rental-search');
+            
+            const debouncedFilter = debounce(renderRentalsTable, 300);
+            
+            statusFilter.addEventListener('change', renderRentalsTable);
+            searchInput.addEventListener('input', debouncedFilter);
+        }
+        
+        function renderRentalsTable() {
+            const tbody = document.getElementById('rentals-table-body');
+            const statusFilter = document.getElementById('rental-status-filter')?.value || '';
+            const searchTerm = document.getElementById('rental-search')?.value.toLowerCase().trim() || '';
+            
+            let filteredRentals = appData.rentals;
+            
+            // Filter by status
+            if (statusFilter) {
+                filteredRentals = filteredRentals.filter(rental => rental.status === statusFilter);
+            }
+            
+            // Filter by search term
+            if (searchTerm) {
+                filteredRentals = filteredRentals.filter(rental => 
+                    (rental.customer_name || '').toLowerCase().includes(searchTerm) ||
+                    rental.customer_phone.includes(searchTerm)
+                );
+            }
+            
+            if (filteredRentals.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" class="text-center">No rentals found</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = filteredRentals.map(rental => {
+                const statusClass = rental.status === 'active' ? 'info' : 
+                                  rental.status === 'returned' ? 'success' : 'error';
+                                  
+                const isOverdue = rental.status === 'active' && new Date(rental.return_date) < new Date();
+                
+                return `
+                    <tr>
+                        <td><strong>${rental.id}</strong></td>
+                        <td>${rental.customer_name || 'N/A'}</td>
+                        <td>${rental.customer_phone}</td>
+                        <td>
+                            ${formatDateDisplay(rental.start_date)} to<br>
+                            ${formatDateDisplay(rental.return_date)}
+                            <small>(${rental.days} days)</small>
+                        </td>
+                        <td>${rental.items.length} items</td>
+                        <td class="currency">${formatCurrency(rental.total_amount)}</td>
+                        <td>
+                            <div class="status status--${isOverdue ? 'error' : statusClass}">
+                                ${isOverdue ? 'OVERDUE' : rental.status.toUpperCase()}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex gap-4">
+                                <button class="btn btn--secondary btn--sm edit-rental-btn" data-id="${rental.id}">Edit</button>
+                                ${rental.status === 'active' ? `<button class="btn btn--success btn--sm return-rental-btn" data-id="${rental.id}">Return</button>` : ''}
+                                <button class="btn btn--info btn--sm invoice-rental-btn" data-id="${rental.id}">Invoice</button>
+                                <button class="btn btn--warning btn--sm whatsapp-rental-btn" data-id="${rental.id}">WhatsApp</button>
+                                <button class="btn btn--error btn--sm delete-rental-btn" data-id="${rental.id}">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
